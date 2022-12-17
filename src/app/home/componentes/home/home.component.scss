@@ -1,0 +1,151 @@
+.descuento{
+  width: 100%;
+  height: 30px;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  p{
+    font-size: 20px;
+    letter-spacing: 3px;
+    font-family: 'Bebas Neue';
+    margin: 0;
+    padding: 0;
+  }
+}
+
+section{
+  padding: 30px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.card {
+  margin:5px;
+  max-width: 350px;
+  a{
+    color: #000;
+    text-decoration: none;
+  }
+  mat-card-actions{
+    margin: 0;
+    padding: 0;
+  }
+  mat-icon{
+    color: red;
+  }
+}
+
+.about{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding:50px;
+  text-align: center;
+  h2{
+    font-family: 'Bebas Neue';
+    font-size: 35px;
+  }
+  p{
+    font-family: 'Lato';
+    font-size: 25px;
+    line-height: 30px;
+  }
+}
+
+.ig{
+  display: flex;
+  align-items: center;
+}
+
+.redes{
+  border-top: .1px groove #000;
+  width: 100%;
+  height: 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  img{
+    width: 40px;
+  }
+  p{
+    font-size: 25px;
+    margin: 0;
+    font-family:'Bebas Neue';
+  }
+}
+.banner{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 150px;
+  h2{
+    text-align: center;
+    font-size: 40px;
+    font-family:'Bebas Neue';
+    margin: 0;
+    color: #fff;
+  }
+}
+.banner1{
+  background: url(../../../../assets/img-velka/post54.jpg) no-repeat scroll;
+  background-size: cover;
+
+}
+.banner2{
+  background: url(../../../../assets/img-velka/post56.jpg) no-repeat scroll;  
+  background-size: cover;
+}
+
+@media(max-width:480px){
+  .firstBanner{
+    width: 100%;
+    height: 100px;
+    background: url(../../../../assets/banner2.png) no-repeat top ;
+    background-size:cover;
+  }
+
+  h1{
+    font-size: 20px;
+  }
+  .container:nth-child(1){
+    width: 100%;
+    height: 30%;
+    background: url(../../../../assets/banner2.png) no-repeat scroll;
+    background-size:cover;
+    background-position: 0% 10%;
+  }
+  span{
+    display: none;
+  }
+  section:nth-child(4){
+    h3{
+      order: 0;
+    }
+  }
+  app-promo{
+    display: flex;
+  }
+
+  .redes{
+    height: 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    img{
+      width: 40px;
+    }
+  }
+  .descuento{
+    text-align: center;
+    height: 40px;
+    p{
+      font-family: 'Lato';
+      font-size: 13px;
+    }
+  }
+}

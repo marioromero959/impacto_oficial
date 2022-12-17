@@ -1,0 +1,27 @@
+<div class="container">
+    <h2>Conocé nuestra modalidad de preventa</h2>
+    <p>Una vez que realizas la compra y el pago se confirma, comenzamos a confeccionar tu pedido! Va a estar disponible para envio/retiro dentro de los 7 días (puede variar dependiendo de la demanda). Una vez listo tu pedido, nos comunicamos con vos para coordinar.</p>
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" *ngFor="let product of products">
+                <mat-card class="card" (click)="addCart(product)">
+                    <img mat-card-image [src]="product.img[0]" alt="product.description" loading="lazy">
+                    <mat-card-content>
+                        <p><strong>{{product.nombre}}</strong></p>
+                        <p class="price">${{product.precio}}</p>
+                        <p>{{product.descripcion}}</p>
+                        <mat-card-actions>
+                            <button mat-raised-button color=primary>Agregar al carrito</button>
+                        </mat-card-actions>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <div class="pago"><p>Aceptamos todos los medio de pago</p></div>
+    <div class="pago">
+        <i><img src="../../../assets/visa-icon.png" alt=""></i>
+        <i><img src="../../../assets/mp-icon.png" alt=""></i>
+        <i><img src="../../../assets/master-icon.png" alt=""></i>
+      </div>
+</div>

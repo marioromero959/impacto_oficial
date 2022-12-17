@@ -1,0 +1,15 @@
+<div class="container" *ngIf="productos.length > 1">
+    <h1>Nuevos ingresos</h1>
+    <div class="producto1">
+        <h2>
+            {{this.productos[0].nombre}}
+        </h2>
+        <img [src]="this.productos[0].img[0]" alt="">
+    </div>
+    <div class="producto2">
+        <h2>
+            {{this.productos[1].nombre}}
+        </h2>
+        <img [src]="this.productos[1].img[0]" alt="">
+    </div>
+</div>

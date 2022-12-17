@@ -1,0 +1,46 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.mat-toolbar{
+  display: flex;
+  justify-content: space-between;
+  a{
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+mat-nav-list{
+  a:nth-child(5){
+    display: none;
+  }
+}
+
+@media(max-width:750px){
+.mat-toolbar{
+  justify-content: flex-start;
+  a{
+    display: none;
+  }
+}
+
+mat-nav-list{
+  a:nth-child(5){
+    display:block;
+  }
+}
+}

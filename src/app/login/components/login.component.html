@@ -1,0 +1,22 @@
+<div class="contact">
+<div class="container">
+    <h1><span>Bienvenido a </span>velka</h1>
+    <form [formGroup]="login">
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="correo" placeholder="usuario@email.com">
+            <mat-error *ngIf="emailField?.invalid">{{errorEmail()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Contraseña</mat-label>
+            <input matInput formControlName="contraseña" [type]="showPassword ? 'text' : 'password'">
+            <mat-icon matSuffix (click)="showPass()">{{icon}}</mat-icon>
+            <mat-error *ngIf="passField?.hasError('required')">Debes ingresar la contraseña</mat-error>
+        </mat-form-field>
+    </form>
+    <div class="buttons">
+        <button mat-raised-button color="primary" (click)="goToHome()">Ingresar</button>
+        <button mat-raised-button color="accent" (click)="goToRegister()">Crea tu cuenta</button>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+
+.contact{
+    display: flex;
+    background:url('../../../../assets/bg-about.jpg');
+    background-position-y: center;
+    background-size:cover;
+    min-height:calc(100vh - 40px)
+}
+.container{
+    width: 80%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+h1{
+    font-size: 30px;
+    color: #000;
+    text-align: center;
+    margin: 20px;    
+    font-family: 'Bebas Neue';
+}
+p{
+    font-size: 30px;
+}
+img{
+    width: 70px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    align-items: center;
+}
+mat-form-field{
+    background-color:rgba(255,255,255, .5);;
+    margin: 15px;
+    padding: 5px;
+    width: 90%;
+    border-radius: 15px;
+}
+mat-label{
+    color:#000
+}
+mat-error{
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+// Sacar flechitas de input number
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+// input[type=number] {
+    // -moz-appearance:textfield; /* Firefox */
+// }
+@media(max-width:750px){
+    .contact{
+    flex-wrap: wrap;
+    }
+    .container{
+        width: 100%;
+    }
+}

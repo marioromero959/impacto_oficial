@@ -1,0 +1,65 @@
+<!-- <div class="container">
+    <div class="spinner">
+        <h1 mat-dialog-title>Editar producto</h1>
+        <mat-progress-spinner
+        diameter="40"
+        *ngIf="showSpinner"
+        color="primary"
+        mode="indeterminate">
+        </mat-progress-spinner>
+    </div>
+    <div mat-dialog-content>
+        <div class="productos">
+            <form [formGroup]="formularioProducto">
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre del producto</mat-label>
+                <input matInput formControlName="nombre">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Categoría</mat-label>
+                <mat-select matInput formControlName="categoria">
+               <mat-option *ngFor="let category of categorias" [value]="category._id">
+                        {{category.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Precio</mat-label>
+                <input matInput formControlName="precio" type="number">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Talles</mat-label>
+                <input matInput type="number" formControlName="talles" min="1" (change)="agregarTalles($event)">
+            </mat-form-field>
+            <div class="tallesProducto">
+                <p>Talles Agregados (toca para eliminar):</p>
+                <div class="talles">
+                    <p *ngFor="let talle of tallesProducto" class="talle" (click)="eliminarTalles(talle)">
+                        {{talle}}
+                    </p>
+                </div> 
+            </div>
+            <div class="boton-imagenes">
+                <input #fileInput type="file" (change)="cargarImg($event)" accept=".png,.jpg,.jpeg" multiple="multiple">
+                <button mat-raised-button>Agregar Imágenes</button>
+            </div>
+            <p>Cantidad de imagenes(max 8): {{showImagenes.length}}</p>
+            <p>(Toca para eliminar)</p>
+            <div class="layout">
+                    <div *ngFor="let img of showImagenes; let i = index">
+                    <img [src]=img alt="rompio" (click)="eliminarImg(i,img)">
+                    <p>Eliminar X</p>
+                </div> 
+            </div>
+            <mat-form-field appearance="fill">
+                <mat-label>Descripción</mat-label>
+                <textarea matInput formControlName="descripcion"></textarea>
+              </mat-form-field>
+            </form>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button type="button" (click)="editarProducto()">Editar</button>
+        <button mat-raised-button color="warn" mat-dialog-close>Volver</button>
+    </div>
+  </div> -->

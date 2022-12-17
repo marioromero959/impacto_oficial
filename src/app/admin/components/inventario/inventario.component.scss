@@ -1,0 +1,39 @@
+.container{
+    text-align: center;
+    padding:20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+table{
+    width: 90%;
+    background-color: #f0f0f0;
+    padding:30px;
+    tr{
+        font-size: 15px;
+    }
+}
+
+.titulo{
+    background-color: rgb(255, 255, 255);
+    th{
+        padding: 10px;
+    }
+}
+
+.productos{
+    background-color: rgb(255, 255, 255);
+}
+@media(max-width:480px){
+    table{
+        max-width: 70%;
+        padding: 0;
+        tr{
+            font-size: 12px;
+        }
+    }
+    .titulo th{
+        padding: 3px;
+    }
+}

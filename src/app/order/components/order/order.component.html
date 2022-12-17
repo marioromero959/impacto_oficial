@@ -1,0 +1,81 @@
+<mat-stepper linear #stepper >
+    <mat-step>
+        <ng-template matStepLabel>Sus productos</ng-template>
+
+        <div *ngIf="(products$ | async) as products" class="container">
+            <p *ngIf="products.length === 0">Aún no hay productos en tu carrito</p>
+              <mat-card class="card" *ngFor="let product of products;let i = index">
+                <img mat-card-image [src]="product.img[0]" alt="product.descripcion" loading="lazy">
+                <p>{{product.nombre}}</p>
+                <mat-card-content>
+                  <p>Cantidad:{{product.cantidad}}</p>
+                    <p>{{product.precio*product.cantidad | currency}}</p>
+                    <p>{{product.descripcion}}</p>
+                    <p>Talle:{{product.talleSeleccionado}}</p>
+                    <mat-card-actions>
+                        <button mat-raised-button (click)="deleteItem(i,product)">Eliminar</button>
+                        <button mat-raised-button color=primary (click)="addCart(product)">Agregar(+1)</button>
+                    </mat-card-actions>
+                </mat-card-content>
+            </mat-card>
+            <p *ngIf="products.length !== 0">Total:{{total() | currency}} </p>
+        </div>
+        
+        <div class="step">
+          <button mat-raised-button color="warn" (click)="deleteAll()" *ngIf="products.length !== 0">Vaciar carrito</button>
+          <button mat-raised-button matStepperNext [disabled]="products.length === 0">Siguiente</button>
+        </div>
+    </mat-step>
+
+    <mat-step [stepControl]="dataClient" editable="true">
+      <form [formGroup]="dataClient">
+        <ng-template matStepLabel>Tus datos</ng-template>
+        <p>Necesitamos los siguientes datos para continuar</p>
+        <mat-form-field appearance="fill" *ngIf="!user">
+          <mat-label>Nombre y Apellido</mat-label>
+          <input matInput formControlName="name" required>
+          <mat-error *ngIf="nameField?.hasError('required')">Debes ingresar tu nombre</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" *ngIf="!user">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" required>
+          <mat-error *ngIf="emailField?.invalid">{{errorEmail()}}</mat-error>
+        </mat-form-field>
+
+        <p>¿Como querés retirar tu pedido?</p>
+        <mat-radio-group aria-label="Select an option" formControlName="envio">
+          <mat-radio-button color="primary" value="domicilio">Envio a domicilio</mat-radio-button>
+          <mat-radio-button color="primary" value="local">Retiro por el local</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field appearance="fill" *ngIf="this.dataClient.get('envio').value !== 'local'">
+          <mat-label>Dirección</mat-label>
+          <input matInput formControlName="direction">
+          <mat-error *ngIf="adressField?.hasError('required')">Debes ingresar tu dirección</mat-error>
+        </mat-form-field>
+        <p class="aviso">Por favor, comunicate con nosotros para coordinar la entrega, ¡gracias!</p>
+        <a class="logowpplink" href="https://wa.link/e6jjkf" target="_blank"><img src="../../../assets/wp-icon.png" alt="logo-whatsapp-velka" class="logowpp"></a>
+        <div class="step">
+          <button mat-raised-button matStepperPrevious color="primary">Volver</button>
+          <button mat-raised-button matStepperNext (click)="paid()">Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Hecho</ng-template>
+      <p>¡Ya casi!</p>
+      <div class="step">
+        <div class="container">
+          <div *ngFor="let product of products">
+              <p><strong>{{product.cantidad}}</strong> {{product.nombre}}</p>
+              <p>{{product.precio*product.cantidad | currency}} c/u </p>
+            </div>
+            <hr>
+          <h3 *ngIf="products.length !== 0">El total a pagar es de:{{total() | currency}}</h3>
+        </div>
+        <button mat-button matStepperPrevious>Volver</button>
+        <button mat-button id="page-content">Continuar</button>
+      </div>
+      <h4>¡Bienvenida al squad, nos comunicamos con vos cuando tu pedido este listo!</h4>
+    </mat-step>
+  </mat-stepper>

@@ -1,0 +1,25 @@
+<div class="inventario">
+    <div class="container">
+        <h1>Inventario</h1>
+        <table>
+            <tr class="titulo">
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Descripción</th>
+              <th>Editar</th>
+              <th>Eliminar</th>
+            </tr>
+            <tr *ngFor ="let producto of productos; let i = index" class="productos">
+              <td>{{producto.nombre}}</td>
+              <td>{{producto.precio}}</td>
+              <td>{{producto.descripcion}}</td>
+              <th><button mat-icon-button (click)="editarProducto(producto)" color="primary">
+                <mat-icon>border_color</mat-icon>
+              </button></th>
+              <th><button mat-icon-button (click)="borrarProducto(producto._id,i)" color="warn">
+                <mat-icon>delete</mat-icon>
+              </button></th>
+            </tr>
+          </table>
+    </div>
+</div>

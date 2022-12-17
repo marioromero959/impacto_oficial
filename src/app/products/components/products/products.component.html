@@ -1,0 +1,27 @@
+<h1>Productos</h1>
+<div class="toggle">
+    <mat-button-toggle-group [formControl]="filterControl">
+        <mat-button-toggle value="all">All</mat-button-toggle>
+        <mat-button-toggle value="top">Tops</mat-button-toggle>
+        <mat-button-toggle value="bikinis">Bikinis</mat-button-toggle>
+      </mat-button-toggle-group>
+</div>
+<div class="container" *ngIf="productos.length !== 0">
+    <mat-card class="card" *ngFor="let product of productos | productsFiltro:filterControl.value" (click)="addCart(product)">
+        <mat-card-header>
+            <mat-card-title>{{product.nombre}}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image [src]="product.img[0]" alt="producto" loading="lazy">
+        <mat-card-content>
+            <p class="precio">
+                {{product.precio | currency}}
+            </p>
+            <p>
+                {{product.descripcion}}
+            </p>
+          </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color=primary>Agregar al carrito</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

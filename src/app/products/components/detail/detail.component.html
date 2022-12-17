@@ -1,0 +1,32 @@
+<mat-dialog-content class="container">
+    <div class="flex-container">
+        <div class="seleccionador">
+            <div *ngFor="let img of product.img; let index = index">
+                <img [src]="img" (click)="changeImg($event,index)" />
+            </div>
+        </div>
+        <div class="img">
+            <img [src]="product.img[index]" alt="product.description" loading="lazy" class="c2">
+        </div>
+        <div class="datos">
+            <mat-card-content class="c3">
+                <p><strong>{{product.nombre}}</strong></p>
+                <p>{{product.precio | currency}}</p>
+                <p>{{product.descripcion}}</p>
+                <mat-form-field appearance="fill">
+                    <mat-label>Talle</mat-label>
+                    <mat-select matInput (selectionChange)="changeTalle($event,product)">
+                        <mat-option *ngFor="let talle of product.talles" [value]="talle">
+                            {{talle}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-card-actions>
+                    <button mat-raised-button mat-dialog-close color=warn>Volver</button>
+                    <button mat-raised-button color=primary (click)="addCart(product)">Agregar</button>
+                </mat-card-actions>
+            </mat-card-content>            
+        </div>
+    </div>
+</mat-dialog-content>
+
