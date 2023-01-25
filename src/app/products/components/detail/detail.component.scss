@@ -31,8 +31,10 @@ mat-dialog-content{
     }
 
     .datos{
+        max-width: 500px;
         order: 3;
-        padding: 10px;
+        padding: 30px;
+        padding-right: 0;
         mat-card-content{
             display: flex;
             flex-direction: column;
@@ -76,8 +78,10 @@ mat-dialog-content{
         }
     
         .datos{
+            max-width: 100%;
             order: 3;
             padding: 10px;
+            padding-right: 10px;
             mat-card-content{
                 display: flex;
                 flex-direction: column;

@@ -7,19 +7,21 @@ import { MaterialModule } from '../material/material.module';
 import { ProductsModule } from '../products/products.module';
 import { IngresosComponent } from './componentes/ingresos/ingresos.component';
 import { CarouselComponent } from './componentes/carousel/carousel.component';
+import { SliderComponent } from './componentes/slider/slider.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     IngresosComponent,
-    CarouselComponent
+    CarouselComponent,
+    SliderComponent
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     MaterialModule,
-    ProductsModule
+    ProductsModule,
   ]
 })
 export class HomeModule { }

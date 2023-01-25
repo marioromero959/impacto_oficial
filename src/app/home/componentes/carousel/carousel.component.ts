@@ -48,7 +48,7 @@ export class CarouselComponent implements OnInit {
               if (mouseOver) return;
               timeout = setTimeout(() => {
                 slider.next();
-              }, 2000);
+              }, 1500);
             }
             slider.on('created', () => {
               slider.container.addEventListener('mouseover', () => {

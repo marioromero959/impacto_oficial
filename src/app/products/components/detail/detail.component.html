@@ -9,13 +9,13 @@
             <img [src]="product.img[index]" alt="product.description" loading="lazy" class="c2">
         </div>
         <div class="datos">
-            <mat-card-content class="c3">
+            <mat-card-content class="content">
                 <p><strong>{{product.nombre}}</strong></p>
-                <p>{{product.precio | currency}}</p>
                 <p>{{product.descripcion}}</p>
+                <p>{{product.precio | currency}}</p>
                 <mat-card-actions>
                     <button mat-raised-button mat-dialog-close color=warn>Volver</button>
-                    <button mat-raised-button color=primary (click)="addCart(product)">Agregar</button>
+                    <button mat-raised-button color=info (click)="addCart(product)">Agregar</button>
                 </mat-card-actions>
             </mat-card-content>            
         </div>

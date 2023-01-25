@@ -12,7 +12,7 @@
         <img *ngIf="product.img" mat-card-image [src]="product.img[0]" alt="producto" loading="lazy">
         <mat-card-content>
             <p class="precio">{{product.precio | currency}}</p>
-            <p>{{product.descripcion}}</p>
+            <!-- <p>{{product.descripcion}}</p> -->
           </mat-card-content>
         <mat-card-actions *ngIf="product.img">
             <button mat-raised-button color=info>Agregar al carrito</button>

@@ -1,0 +1,8 @@
+<div class="swiper mySwiper" *ngIf="products$ | async as products">
+    <div class="swiper-wrapper" *ngIf="products.length > 0">
+      <div class="swiper-slide" *ngFor="let product of products">
+        <img *ngIf="product.img" mat-card-image [src]="product.img[0]" alt="product.description">        
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
