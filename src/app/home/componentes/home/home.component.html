@@ -1,38 +1,18 @@
-<div class="descuento">
-    <p>
-      10% de descuento pagando con transferencia bancaria o efectivo
-    </p>
-</div>
+<app-carousel [sizing]="['100%','80vh']" [autoplay]="true" [imagenes]="imagenesCarousel" ></app-carousel>
 
-<app-carousel [sizing]="['100%','60vh']" [autoplay]="true" [imagenes]="imagenesCarousel" ></app-carousel>
-
-<app-promo></app-promo>
+<!-- <app-promo></app-promo> -->
 
 <div class="banner banner1" routerLink="../products">
   <h2>Conoce mas</h2>
 </div>
 
-  <section>
-    <mat-card class="card" *ngFor="let card of cards">
-      <a href="https://www.instagram.com/accesoriosvelka/" target="_blank">
-        <img mat-card-image [src]="card.img" alt="velka-accesorios" loading="lazy">
-        <mat-card-actions>
-          <button mat-button><mat-icon>favorite</mat-icon></button>
-          <button mat-button>ME ENCANTA</button>
-        </mat-card-actions>
-      </a>
-    </mat-card>
-  </section>
-  
-  <div class="about">
-    <h2>¿Que es Velka hand made?</h2>
-    <p>Velka surge como un emprendimiento de accesorios super chiquito pero hechos con mucho amor, que luego de un tiempo creció y empezamos a realizar nuestras propias prendas hand made, siempre con el mismo amor e incluso más. 🤍</p>
-    <p>¡Gracias por eleginos!</p>
-  </div>
+<app-products></app-products>
 
+<div class="banner banner1" routerLink="../products">
+  <h2>Trabajamos con las mejores marcas</h2>
+</div>
 
-<app-ingresos>
-</app-ingresos> 
+<app-ingresos></app-ingresos> 
 
 
 <div class="banner banner2" routerLink="../products">

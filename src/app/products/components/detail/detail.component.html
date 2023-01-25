@@ -13,14 +13,6 @@
                 <p><strong>{{product.nombre}}</strong></p>
                 <p>{{product.precio | currency}}</p>
                 <p>{{product.descripcion}}</p>
-                <mat-form-field appearance="fill">
-                    <mat-label>Talle</mat-label>
-                    <mat-select matInput (selectionChange)="changeTalle($event,product)">
-                        <mat-option *ngFor="let talle of product.talles" [value]="talle">
-                            {{talle}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
                 <mat-card-actions>
                     <button mat-raised-button mat-dialog-close color=warn>Volver</button>
                     <button mat-raised-button color=primary (click)="addCart(product)">Agregar</button>

@@ -4,6 +4,7 @@
         <table>
             <tr class="titulo">
               <th>Nombre</th>
+              <th>Stock</th>
               <th>Precio</th>
               <th>Descripción</th>
               <th>Editar</th>
@@ -11,9 +12,10 @@
             </tr>
             <tr *ngFor ="let producto of productos; let i = index" class="productos">
               <td>{{producto.nombre}}</td>
+              <td>{{producto.stock}}</td>
               <td>{{producto.precio}}</td>
               <td>{{producto.descripcion}}</td>
-              <th><button mat-icon-button (click)="editarProducto(producto)" color="primary">
+              <th><button mat-icon-button (click)="editarProducto(producto)" color="info">
                 <mat-icon>border_color</mat-icon>
               </button></th>
               <th><button mat-icon-button (click)="borrarProducto(producto._id,i)" color="warn">

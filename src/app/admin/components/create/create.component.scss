@@ -30,33 +30,6 @@ form{
     text-align: center;
     padding-bottom: 20px;
 }
-.tallesProducto{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 70%;
-    margin: auto;
-    margin-bottom: 20px;
-    padding: 10px 0;
-    border-bottom: 1px solid grey;
-    background-color: #f0f0f0;
-    p{
-        margin-left: 10px;
-        color: grey;
-    }
-    .talles{
-        display: flex;
-        flex-wrap: wrap;
-        p{
-            color: #000;
-            border: 1px solid #000;
-            border-radius:5px;
-            font-size: 20px;
-            padding: 5px;
-            font-weight: 400;
-        }
-    }
-}
 
 .boton-imagenes{
     height: 60px;

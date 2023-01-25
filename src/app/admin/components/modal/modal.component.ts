@@ -29,7 +29,6 @@ export class ModalComponent implements OnInit {
   id: string = '';
   showSpinner: boolean = false;
   mode: 'indeterminate';
-  tallesProducto = [];
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
@@ -44,20 +43,20 @@ export class ModalComponent implements OnInit {
       nombre: ['', Validators.required],
       categoria: ['', Validators.required],
       precio: ['', Validators.required],
-      talles: [null],
+      stock: null,
       img: [''],
       descripcion: [''],
     });
   }
 
   ngOnInit(): void {
-    this.tallesProducto = this.data.talles;
     this.data.img.forEach((urlImg) => {
       this.showImagenes.push(urlImg);
     });
-    const { _id, nombre, precio, categoria, img, descripcion } = this.data;
+    const { _id, nombre,stock, precio, categoria, img, descripcion } = this.data;
     const producto = {
       nombre,
+      stock,
       categoria: categoria._id,
       precio,
       descripcion,
@@ -67,16 +66,6 @@ export class ModalComponent implements OnInit {
       this.categorias = res['categorias'];
     });
     this.cargarProducto(producto);
-  }
-
-  agregarTalles(e) {
-    let talle = Number(e.target.value);
-    this.tallesProducto.push(talle);
-    this.formularioProducto.get('talles').patchValue(this.tallesProducto);
-  }
-  eliminarTalles(talle) {
-    let index = this.tallesProducto.indexOf(talle);
-    this.tallesProducto.splice(index, 1);
   }
 
   openSnackBar(message: string) {
@@ -134,20 +123,21 @@ export class ModalComponent implements OnInit {
 
   //TODO: MENSAJE DE ERRORES
   editarProducto() {
-    if (this.formularioProducto.invalid || this.tallesProducto.length == 0) {
+    if (this.formularioProducto.invalid) {
       this.formularioProducto.markAllAsTouched();
     } else {
       this.showSpinner = true;
-      const { categoria, nombre, precio, descripcion } =
+      const { categoria, nombre,stock, precio, descripcion } =
         this.formularioProducto.value;
       const product = {
         id: this.id,
         nombre,
         categoria,
         precio,
-        talles: this.tallesProducto,
+        stock,
         descripcion,
       };
+      
       this.adminSvc.editProduct(product).subscribe(
         (res: any) => {
           if (this.imagenesProducto.length > 0 || this.borradas.length > 0) {

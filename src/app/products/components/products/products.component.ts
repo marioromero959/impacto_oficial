@@ -7,6 +7,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from 'src/app/modalError/modal/modal.component';
 import { DetailComponent } from '../detail/detail.component';
 import { NavigationEnd, Router } from '@angular/router';
+import { finalize, Observable, forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { AdminService } from '../../../admin/services/admin.service';
 
 @Component({
   selector: 'app-products',
@@ -15,21 +18,26 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class ProductsComponent implements OnInit {
 
-  filterControl = new FormControl('all');
+  filterControl = new FormControl('All');
 
   productos:any = []
+  categorias:any = []
   showProducts = true
+
   constructor(
     private productSvc:ProductsService,
     private orderSvc:OrderService,
     public dialog:MatDialog,
     public router:Router,
+    private adminSvc:AdminService
     ) { }
 
   ngOnInit(){
-    this.productSvc.getAllProductsapi().subscribe(res=>{
-     this.productos = res;
-    })
+    this.cargarDatosGenerales()
+    // .pipe(
+    //   finalize(() => {})
+    // )
+    .subscribe();
 
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
@@ -37,6 +45,23 @@ export class ProductsComponent implements OnInit {
       }
       document.body.scrollTop = 0;
   });
+  }
+
+
+  cargarDatosGenerales():Observable<any>{
+    const datosGenerales = forkJoin({
+      productos: this.productSvc.getAllProductsapi().pipe(
+        map((res) => {
+          this.productos = res;
+        })
+      ),
+      categorias: this.adminSvc.getCategories().pipe(
+        map((res:any) => {
+          this.categorias = [{nombre:'All'},...res.categorias];
+        })
+      ),
+    });
+    return datosGenerales;
   }
 
   addCart(product:Productos){

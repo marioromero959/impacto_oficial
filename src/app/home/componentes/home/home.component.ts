@@ -15,9 +15,11 @@ export class HomeComponent implements OnInit {
     {img:"../../../assets/img-velka/frase2.jpg"}
   ]
   imagenesCarousel = [
-    "../../../../assets/impacto_logo.jpg",
-    "../../../../assets/impacto_logo.jpg",
-    "../../../../assets/impacto_logo.jpg",
+    "../../../../assets//productos_impacto/impacto_parlantes6.jpg",
+    "../../../../assets//productos_impacto/impacto_parlantes1.jpg",
+    "../../../../assets//productos_impacto/impacto_parlantes4.jpg",
+    "../../../../assets//productos_impacto/impacto_parlantes5.jpg",
+    "../../../../assets//productos_impacto/impacto_parlantes3.jpg",
   ]
   constructor(private productSvc:ProductsService) {}
 

@@ -11,14 +11,9 @@
 h1,h2{
     grid-area: titulo;
     font-size: 35px;
-    font-family: 'Bebas Neue';
+    font-family: var(--primary-font);
     margin-top: 16px;
 }
-// p{
-//     font-size: 25px;
-//     font-family: 'Lato';
-//     margin: 16px;
-// }
 .producto1{
     display: flex;
     align-items: center;

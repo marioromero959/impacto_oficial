@@ -4,6 +4,7 @@
       <div *ngFor="let slide of imagenesSlider" class="keen-slider__slide">
         <img [src]="slide" alt="" [style.width]="this.sizing[0]" [style.height]="this.sizing[1]">
       </div>
+      
     </div>
     <svg
       [ngClass]="
@@ -32,11 +33,11 @@
       <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
     </svg>
   </div>
-  <div class="dots">
+  <!-- <div class="dots">
     <button
       (click)="slider.moveToIdx(i)"
       *ngFor="let slide of dotHelper; let i = index"
       [class]="'dot ' + (i === currentSlide ? 'active' : '')"
     ></button>
-  </div>
+  </div> -->
   

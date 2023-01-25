@@ -44,7 +44,6 @@ export class OrderService {
       precio:0,
       categoria:'',
       disponible:true,
-      talleSeleccionado:0,
       img:'',
       cantidad:0,
     })
@@ -58,15 +57,7 @@ export class OrderService {
     //Verificamos si el producto ya esta en el carrito
     let productoRepetido = this.productos.controls.filter(p=>p.get('_id').value == product._id)
     if(productoRepetido.length >= 1){
-      //Si ese tipo de producto ya esta en el carrito, corroboro el talle
-      let talleRepetido = productoRepetido.filter(p=>p.get('talleSeleccionado').value == product.talleSeleccionado)
-      if(talleRepetido.length>=1){
-        talleRepetido[0].patchValue({cantidad:talleRepetido[0].value.cantidad+1})
-      }else{
-        //En este caso agrego el mismo producto pero de un talle diferente
-        producto.patchValue({cantidad:1})
         this.productos.push(producto)
-      }
     }else{
       //Si el producto no esta en el carrito, se agrega
       producto.patchValue({cantidad:1})

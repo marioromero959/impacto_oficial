@@ -1,7 +1,7 @@
 h1{
     text-align: center;
     margin: 20px;
-    font-family: 'Bebas Neue';
+    font-family: var(--primary-font);
     font-size: 30px;
 }
 
@@ -18,7 +18,7 @@ h1{
     width: 300px;
     margin: 30px;
     mat-card-title,p{
-        font-family: 'Lato';
+        font-family: var(--primary-font);
     }
     p{
         font-size: 20px;

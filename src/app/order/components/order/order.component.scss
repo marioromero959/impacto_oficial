@@ -26,7 +26,7 @@ p{
     color: red;
 }
 mat-card > p:nth-child(2){
-    font-family: 'Bebas Neue';
+    font-family: var(--primary-font);
     font-size: 35px;
 }
 mat-card-actions{
@@ -75,10 +75,11 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 input[type=number] {
+    appearance:textfield; /* Firefox */
     -moz-appearance:textfield; /* Firefox */
 }
 h4{
-    font-family: 'Lato';
+    font-family: var(--primary-font);
     font-size: 30px;
     color: var(--primary);
     text-align: center;

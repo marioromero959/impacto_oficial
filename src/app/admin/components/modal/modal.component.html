@@ -1,4 +1,4 @@
-<!-- <div class="container">
+<div class="container">
     <div class="spinner">
         <h1 mat-dialog-title>Editar producto</h1>
         <mat-progress-spinner
@@ -28,17 +28,9 @@
                 <input matInput formControlName="precio" type="number">
             </mat-form-field>
             <mat-form-field appearance="fill">
-                <mat-label>Talles</mat-label>
-                <input matInput type="number" formControlName="talles" min="1" (change)="agregarTalles($event)">
+                <mat-label>Stock</mat-label>
+                <input matInput type="number" formControlName="stock" min="1">
             </mat-form-field>
-            <div class="tallesProducto">
-                <p>Talles Agregados (toca para eliminar):</p>
-                <div class="talles">
-                    <p *ngFor="let talle of tallesProducto" class="talle" (click)="eliminarTalles(talle)">
-                        {{talle}}
-                    </p>
-                </div> 
-            </div>
             <div class="boton-imagenes">
                 <input #fileInput type="file" (change)="cargarImg($event)" accept=".png,.jpg,.jpeg" multiple="multiple">
                 <button mat-raised-button>Agregar Imágenes</button>
@@ -62,4 +54,4 @@
         <button mat-raised-button type="button" (click)="editarProducto()">Editar</button>
         <button mat-raised-button color="warn" mat-dialog-close>Volver</button>
     </div>
-  </div> -->
+  </div> 

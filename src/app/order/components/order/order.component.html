@@ -11,7 +11,6 @@
                   <p>Cantidad:{{product.cantidad}}</p>
                     <p>{{product.precio*product.cantidad | currency}}</p>
                     <p>{{product.descripcion}}</p>
-                    <p>Talle:{{product.talleSeleccionado}}</p>
                     <mat-card-actions>
                         <button mat-raised-button (click)="deleteItem(i,product)">Eliminar</button>
                         <button mat-raised-button color=primary (click)="addCart(product)">Agregar(+1)</button>

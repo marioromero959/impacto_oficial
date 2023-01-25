@@ -25,7 +25,6 @@
 
 mat-toolbar{
   height: max-content;
-  border-bottom: 1px solid #fff;
 }
 mat-toolbar .btn-cart{
   margin-left: 70%;
@@ -53,15 +52,16 @@ a.active{
   background-color: var(--primary);
 }
 mat-toolbar a{
+  color: #fff !important;
   font-size: 20px;
-  font-family: 'Bebas Neue' !important;
+  font-family: var(--primary-font) !important;
 }
 mat-toolbar a:hover{
   color: #fff !important;
   background-color: var(--primary);
 }
 mat-toolbar a:nth-child(7){
-  color: #000 !important;
+  // color: #000 !important;
   background-color:transparent;
 }
 .buttons{

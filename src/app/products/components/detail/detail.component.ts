@@ -28,17 +28,9 @@ export class DetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  changeTalle(e,product){
-    product.talleSeleccionado = e.value
-  }
-
   addCart(product:Productos){
-      if(product.talleSeleccionado === undefined){
-        this.openSnackBar("Porfa, primero carga el talle",5000)
-      }else{
-        this.orderSvc.addCart(product)
-        this.openSnackBar("+1 Producto agregado al carrito",2000)
-      }   
+    this.orderSvc.addCart(product)
+    this.openSnackBar("+1 Producto agregado al carrito",2000)
   }
 
   changeImg(e,index){

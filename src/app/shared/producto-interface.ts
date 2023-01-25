@@ -7,7 +7,6 @@ export interface Producto {
     descripcion: string;
     disponible:  boolean;
     img:         string;
-    talle?:      string;
 }
 
 export interface Categoria {

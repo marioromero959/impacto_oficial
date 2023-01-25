@@ -7,7 +7,7 @@ export class ProductsPipe implements PipeTransform {
 
   transform(value: any, busqueda:string){
     const productosFiltrados = [];
-    if (busqueda === null || busqueda === 'all'){
+    if (busqueda === null || busqueda === 'All'){
       return value;
     }
     for(const producto of value){
@@ -15,6 +15,9 @@ export class ProductsPipe implements PipeTransform {
         productosFiltrados.push(producto)
       }
     }
+    if(productosFiltrados.length == 0)
+    return [{nombre:"De momento no tenemos estos productos en stock, podes revisar otras secciones mientras tanto"}];
+    
     return productosFiltrados;
   }
 

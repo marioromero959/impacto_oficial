@@ -20,6 +20,8 @@ export class InventarioComponent implements OnInit {
     ) { 
     this.productSvc.getAllProductsapi()
     .subscribe((productos:Productos[])=>{
+      console.log(productos);
+      
     this.productos = productos
     })
   }

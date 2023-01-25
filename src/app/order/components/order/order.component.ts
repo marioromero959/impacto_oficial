@@ -58,7 +58,6 @@ export class OrderComponent implements OnInit {
       img:[''],
       nombre:[''],
       precio:[''],
-      talle:[],
       usuario:[''],
       _id:[''],
     });

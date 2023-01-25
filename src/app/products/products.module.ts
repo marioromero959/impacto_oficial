@@ -24,7 +24,8 @@ import { PromoComponent } from './components/promo/promo.component';
     ReactiveFormsModule
   ],
   exports:[
-    PromoComponent
+    PromoComponent,
+    ProductsComponent
   ]
 })
 export class ProductsModule { }

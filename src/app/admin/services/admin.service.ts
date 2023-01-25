@@ -75,7 +75,7 @@ export class AdminService {
     const headers = new HttpHeaders({
       'x-token':localStorage.getItem('token')
     })
-    return this.http.put(`${environment.API}/api/productos/${product.id}`,{nombre:product.nombre,precio:product.precio,talles:product.talles,descripcion:product.descripcion},{headers})
+    return this.http.put(`${environment.API}/api/productos/${product.id}`,{nombre:product.nombre,precio:product.precio,stock:product.stock,descripcion:product.descripcion},{headers})
 
   }
 

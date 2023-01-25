@@ -25,7 +25,7 @@ export class CreateComponent implements OnInit {
   viewImg: any = '../../../../assets/no-img.png';
   showSpinner: boolean = false;
   categorias = [];
-  tallesProducto = [];
+  stockProducto:number = 0;
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
@@ -39,7 +39,7 @@ export class CreateComponent implements OnInit {
       nombre: ['', Validators.required],
       categoria: ['', Validators.required],
       precio: ['', Validators.required],
-      talles: ['', Validators.required],
+      stock: ['', Validators.required],
       descripcion: [''],
     });
     this.formularioCategoria = this.formBuilder.group({
@@ -175,24 +175,19 @@ export class CreateComponent implements OnInit {
     this.blobs.splice(id, 1);
   }
 
-  agregarTalles(e) {
-    let talle = Number(e.target.value);
-    this.tallesProducto.push(talle);
-    this.formularioProducto.get('talles').patchValue(this.tallesProducto);
-  }
-  eliminarTalles(talle) {
-    let index = this.tallesProducto.indexOf(talle);
-    this.tallesProducto.splice(index, 1);
+  changeStock(e) {
+    const stock = Number(e.target.value);
+    this.formularioProducto.get('stock').patchValue(stock);
   }
 
   crearProducto() {
-    if (this.formularioProducto.invalid || this.tallesProducto.length == 0) {
+    if (this.formularioProducto.invalid) {
       this.formularioProducto.markAllAsTouched();
     } else {
       this.showSpinner = true;
-      const { categoria, nombre, precio, talles, descripcion } =
-        this.formularioProducto.value;
-      const product = { nombre, categoria, precio, talles, descripcion };
+      const { categoria, nombre, precio, stock, descripcion } = this.formularioProducto.value;
+      
+      const product = { nombre, categoria, precio, stock, descripcion };
       this.adminSvc.addProduct(product).subscribe(
         (res: any) => {
           this.showSpinner = false;
