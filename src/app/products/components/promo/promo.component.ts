@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { OrderService } from 'src/app/services//order/order.service';
 import { ProductsService } from '../../services/products.service';
-import Swiper, { Navigation, Pagination,Autoplay } from 'swiper';
+// import Swiper, { Navigation, Pagination,Autoplay } from 'swiper';
 import { Productos } from 'src/app/admin/interface/product';
 import { DetailComponent } from '../detail/detail.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './promo.component.html',
   styleUrls: ['./promo.component.scss']
 })
-export class PromoComponent implements OnInit, AfterViewInit{
+export class PromoComponent implements OnInit{
 
   products:Productos[] = [];
 
@@ -27,21 +27,21 @@ export class PromoComponent implements OnInit, AfterViewInit{
     })
   }
 
-  ngAfterViewInit(){
-    Swiper.use([Navigation, Pagination,Autoplay,]);
-    const swiper = new Swiper('.swiper', {
-      autoplay:{
-        disableOnInteraction:false,
-        delay:4000,
-        stopOnLastSlide:false,
-      },
-    });
-  }
+  // ngAfterViewInit(){
+  //   Swiper.use([Navigation, Pagination,Autoplay,]);
+  //   const swiper = new Swiper('.swiper', {
+  //     autoplay:{
+  //       disableOnInteraction:false,
+  //       delay:4000,
+  //       stopOnLastSlide:false,
+  //     },
+  //   });
+  // }
 
-  addCart(product:Productos){
-    const dialogRef = this.dialog.open(DetailComponent,{
-      disableClose:false,
-      data:product
-    }); 
-  }
+   addCart(product:Productos){
+     const dialogRef = this.dialog.open(DetailComponent,{
+       disableClose:false,
+       data:product
+     }); 
+   }
 }

@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, OnInit, Input } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
 import KeenSlider, { KeenSliderInstance } from 'keen-slider';
 
 @Component({
@@ -17,19 +17,26 @@ export class CarouselComponent implements OnInit {
   slider: KeenSliderInstance = null;
 
   @Input('imagenes') imagenesSlider = [];
+  @Input('unitsPerView') units = 0;
   @Input('autoplay') autoplay = false;
   @Input('sizing') sizing = [];
+  @Input('dots') dots = false;
 
   constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
+  // ngOnChanges(changes: SimpleChanges): void{}
+
   
   ngAfterViewInit() {
     setTimeout(() => {
       this.slider = new KeenSlider(
         this.sliderRef.nativeElement,
         {
+          slides: {
+            perView: this.units,
+            spacing: 15,
+          },
           loop: true,
           initial: this.currentSlide,
           slideChanged: (s) => {
@@ -48,12 +55,14 @@ export class CarouselComponent implements OnInit {
               if (mouseOver) return;
               timeout = setTimeout(() => {
                 slider.next();
-              }, 1500);
+              }, 2500);
             }
             slider.on('created', () => {
               slider.container.addEventListener('mouseover', () => {
-                mouseOver = true;
-                clearNextTimeout();
+                mouseOver = false;
+                nextTimeout();
+
+                // clearNextTimeout();
               });
               slider.container.addEventListener('mouseout', () => {
                 mouseOver = false;
