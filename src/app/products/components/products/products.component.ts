@@ -4,12 +4,13 @@ import { ProductsService } from '../../services/products.service';
 import { OrderService } from 'src/app/services/order/order.service';
 import { Productos } from 'src/app/admin/interface/product';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalComponent } from 'src/app/modalError/modal/modal.component';
 import { DetailComponent } from '../detail/detail.component';
 import { NavigationEnd, Router } from '@angular/router';
-import { finalize, Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AdminService } from '../../../admin/services/admin.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-products',
@@ -29,16 +30,12 @@ export class ProductsComponent implements OnInit {
     private orderSvc:OrderService,
     public dialog:MatDialog,
     public router:Router,
-    private adminSvc:AdminService
+    private adminSvc:AdminService,
+    private _snackBar: MatSnackBar
     ) { }
 
   ngOnInit(){
-    this.cargarDatosGenerales()
-    // .pipe(
-    //   finalize(() => {})
-    // )
-    .subscribe();
-
+    this.cargarDatosGenerales().subscribe();
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
           return;
@@ -65,9 +62,17 @@ export class ProductsComponent implements OnInit {
   }
 
   addCart(product:Productos){
-    const dialogRef = this.dialog.open(DetailComponent,{
-      disableClose:false,
-      data:product
-    }); 
+    this.orderSvc.addCart(product)
+    this.openSnackBar(`+1 ${product.nombre} agregado al carrito`, 2000)
+  }
+  openSnackBar(message:string,duration) {
+    this._snackBar.open(message, '', {
+      horizontalPosition:'center',
+      verticalPosition: 'top',
+      duration:duration
+    });
+  }
+  showDetails(product:Productos){
+     this.router.navigate([`products/${product._id}`])
   }
 }

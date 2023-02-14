@@ -1,15 +1,37 @@
-<div class="container" *ngIf="productos.length > 1">
-    <h1>Nuevos ingresos</h1>
-    <div class="producto1">
-        <h2>
-            {{this.productos[0].nombre}}
-        </h2>
-        <img [src]="this.productos[0].img[0]" alt="">
+<h2>NUEVOS INGRESOS</h2>
+<div class="offer">
+
+    <div class="container card" *ngIf="productos.length > 1">
+        <div class="card_left">
+            <img [src]="this.productos[0]?.img[0]">
+        </div>
+      <div class="card_right">
+          <span>Nuevo ingreso</span>
+          <h3>{{this.productos[0]?.nombre}}</h3>
+          <p>{{this.productos[0]?.descripcion}} </p>
+          <div class="card_footer">
+              <span class="price">${{this.productos[0]?.precio}}</span>
+              <a href="#" class="btn">
+                  Agregar
+                </a>
+            </div>
+        </div>
     </div>
-    <div class="producto2">
-        <h2>
-            {{this.productos[1].nombre}}
-        </h2>
-        <img [src]="this.productos[1].img[0]" alt="">
+
+    <div class="container card" *ngIf="productos.length > 1">
+        <div class="card_left">
+            <img [src]="this.productos[1]?.img[0]">
+        </div>
+      <div class="card_right">
+          <span>Nuevo ingreso</span>
+          <h3>{{this.productos[1]?.nombre}}</h3>
+          <p>{{this.productos[1]?.descripcion}} </p>
+          <div class="card_footer">
+              <span class="price">${{this.productos[1]?.precio}}</span>
+              <a href="#" class="btn">
+                  Agregar
+                </a>
+            </div>
+        </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Productos } from 'src/app/admin/interface/product';
 import { ProductsService } from 'src/app/products/services/products.service';
 import { map } from 'rxjs/operators';
@@ -10,6 +10,8 @@ import { map } from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
   products = []
+  carouselHeigth:string = '70vh';
+  itemsPromo:number = 5;
 
   cards = [
     {img:"../../../assets/img-velka/frase9.jpg"},
@@ -18,15 +20,13 @@ export class HomeComponent implements OnInit {
   ]
 
   imagenesCarousel = [
-    {img:"../../../../assets//productos_impacto/impacto_parlantes6.jpg"},
-    {img:"../../../../assets//productos_impacto/impacto_parlantes1.jpg"},
-    {img:"../../../../assets//productos_impacto/impacto_parlantes4.jpg"},
-    {img:"../../../../assets//productos_impacto/impacto_parlantes5.jpg"},
-    {img:"../../../../assets//productos_impacto/impacto_parlantes3.jpg"},
+    {img:"../../../../assets/banner1.jpeg"},
+    {img:"../../../../assets/banner2.svg"},
   ]
   constructor(private productSvc:ProductsService) {}
 
   ngOnInit(): void {
+    // this.carouselHeigth = (window.innerWidth < 767) ? '30vh' : '100vh;'
     this.productSvc.getAllProductsapi()
     .subscribe(res=>{
       this.products = res.map(el=>{
@@ -36,5 +36,14 @@ export class HomeComponent implements OnInit {
       });
     })
   }
-  
+  @HostListener('window:resize', ['$event']) 
+  doSomething() {
+    if(window.innerWidth < 767){
+      this.carouselHeigth = '30vh'; 
+      this.itemsPromo = 1;
+    }else{
+      this.carouselHeigth = '70vh'; 
+      this.itemsPromo = 5;
+    }
+  }
 }

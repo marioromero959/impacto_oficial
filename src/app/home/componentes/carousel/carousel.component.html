@@ -1,7 +1,7 @@
 
   <div  class="navigation-wrapper">
     <div  class="keen-slider keen-slider--vertical" #sliderRef>
-      <div *ngFor="let slide of imagenesSlider" class="keen-slider__slide">
+      <div *ngFor="let slide of imagenesSlider" class="keen-slider__slide" (click)="showDetails(slide)">
         <img [src]="slide.img" alt="" [style.width]="this.sizing[0]" [style.height]="this.sizing[1]">
         <p>{{slide.nombre}}</p>
         <p *ngIf="slide.precio" class="price">${{slide.precio | number : '1.2-2'}}</p>

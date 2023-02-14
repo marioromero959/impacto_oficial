@@ -51,13 +51,13 @@ export class OrderService {
 
 
 
-  addCart(product:Productos){
+  addCart(product:Productos){    
     let producto = this.createProductForm() as FormGroup;
     producto.patchValue(product)
     //Verificamos si el producto ya esta en el carrito
-    let productoRepetido = this.productos.controls.filter(p=>p.get('_id').value == product._id)
-    if(productoRepetido.length >= 1){
-        this.productos.push(producto)
+    let productoRepetido = this.productos.controls.find(p=>p.get('_id').value == product._id)
+    if(productoRepetido){
+      productoRepetido.get('cantidad').setValue(productoRepetido.get('cantidad').value + 1)
     }else{
       //Si el producto no esta en el carrito, se agrega
       producto.patchValue({cantidad:1})
@@ -71,12 +71,17 @@ export class OrderService {
     return productos
   }
 
-  deleteCart(index:number,product){
-    if(product.cantidad > 1){
-      product.cantidad = product.cantidad - 1 
-    }else if(product.cantidad === 1){
+  deleteCart(product){
+    let productoRepetido = this.productos.controls.find(p=>p.get('_id').value == product._id)
+    if(productoRepetido){
+      productoRepetido.get('cantidad').setValue(productoRepetido.get('cantidad').value - 1)
+    }
+    if(productoRepetido.get('cantidad').value === 0){
+      let index = this.productos.controls.findIndex(p=>p.get('_id').value == product._id)
       this.productos.removeAt(index)
     }
+    console.log("prod",this.productos.value);
+    
      this.cart.next(this.productos.value)
   }
   

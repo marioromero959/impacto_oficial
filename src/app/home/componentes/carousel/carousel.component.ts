@@ -1,5 +1,7 @@
-import { Component, ViewChild, ElementRef, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import KeenSlider, { KeenSliderInstance } from 'keen-slider';
+import { Productos } from 'src/app/admin/interface/product';
 
 @Component({
   selector: 'app-carousel',
@@ -9,7 +11,7 @@ import KeenSlider, { KeenSliderInstance } from 'keen-slider';
     './carousel.component.scss',
   ],
 })
-export class CarouselComponent implements OnInit {
+export class CarouselComponent implements OnInit ,OnChanges{
   @ViewChild('sliderRef') sliderRef: ElementRef<HTMLElement>;
 
   currentSlide: number = 0;
@@ -22,12 +24,15 @@ export class CarouselComponent implements OnInit {
   @Input('sizing') sizing = [];
   @Input('dots') dots = false;
 
-  constructor() {}
+  constructor(private router:Router) {}
 
   ngOnInit(): void {}
-  // ngOnChanges(changes: SimpleChanges): void{}
+  ngOnChanges(changes:SimpleChanges): void {
+    if(!changes['units']?.firstChange){
+      this.ngAfterViewInit()    
+    }
+  }
 
-  
   ngAfterViewInit() {
     setTimeout(() => {
       this.slider = new KeenSlider(
@@ -55,13 +60,12 @@ export class CarouselComponent implements OnInit {
               if (mouseOver) return;
               timeout = setTimeout(() => {
                 slider.next();
-              }, 2500);
+              }, 2000);
             }
             slider.on('created', () => {
               slider.container.addEventListener('mouseover', () => {
                 mouseOver = false;
                 nextTimeout();
-
                 // clearNextTimeout();
               });
               slider.container.addEventListener('mouseout', () => {
@@ -81,6 +85,12 @@ export class CarouselComponent implements OnInit {
       ];
     });
   }
+
+  showDetails(product:Productos){
+    if(product._id){
+      this.router.navigate([`products/${product._id}`])
+    }
+ }
 
   ngOnDestroy() {
     if (this.slider) this.slider.destroy();

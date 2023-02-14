@@ -1,10 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router'
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
 import { OrderService } from 'src/app/services/order/order.service';
 import { ProductsService } from '../../services/products.service';
 import { Productos } from 'src/app/admin/interface/product';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-detail',
@@ -14,34 +14,60 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class DetailComponent implements OnInit {
 
   index: number = 0;
+  product: Productos;
+  products:Productos[] = [];
 
   constructor(
-        @Inject(MAT_DIALOG_DATA) 
-        public product: any,
-        private route:ActivatedRoute,
-        private productSvc:ProductsService,
-        private orderSvc:OrderService,
-        public dialogRef: MatDialogRef<DetailComponent>,
-        private _snackBar: MatSnackBar)
-         { }
+    private route: ActivatedRoute,
+    private router: Router,
+    private productSvc: ProductsService,
+    private orderSvc: OrderService,
+    private _snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
+    const id = this.route.snapshot.params['id'];
+    this.getProduct(id)
+    this.productSvc.getAllProductsapi()
+    .subscribe(res=>{
+      this.products = res.map(el=>{
+        let obj = el;
+        obj.img = el.img[0]
+        return obj
+      });
+    })
+    this.subChanges()
   }
 
-  addCart(product:Productos){
-    this.orderSvc.addCart(product)
-    this.openSnackBar("+1 Producto agregado al carrito",2000)
+  getProduct(id){
+    this.productSvc.getProductapi(id).subscribe((res: Productos) => {
+      this.product = res;
+    })
   }
 
-  changeImg(e,index){
+  addCart() {
+    this.orderSvc.addCart(this.product)
+    this.openSnackBar(`+1 ${this.product.nombre} agregado al carrito`, 2000)
+  }
+
+  changeImg(e, index) {
     this.index = index;
   }
 
-  openSnackBar(message:string,duration) {
+  openSnackBar(message: string, duration) {
     this._snackBar.open(message, '', {
-      horizontalPosition:'center',
+      horizontalPosition: 'center',
       verticalPosition: 'top',
-      duration:duration
+      duration: duration
     });
+  }
+
+  subChanges(){
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(event => {
+      const id = this.route.snapshot.paramMap.get('id');
+      this.getProduct(id)
+    });    
   }
 }

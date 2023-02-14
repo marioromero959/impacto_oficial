@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DetailComponent } from './components/detail/detail.component';
 import { ProductsPipe } from './pipes/products.pipe';
 import { PromoComponent } from './components/promo/promo.component';
+import { CarouselComponent } from '../home/componentes/carousel/carousel.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { PromoComponent } from './components/promo/promo.component';
     ProductsComponent,
     DetailComponent,
     ProductsPipe,
-    PromoComponent
+    PromoComponent,
+    CarouselComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { PromoComponent } from './components/promo/promo.component';
   ],
   exports:[
     PromoComponent,
-    ProductsComponent
+    ProductsComponent,
+    CarouselComponent
   ]
 })
 export class ProductsModule { }

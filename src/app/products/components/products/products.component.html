@@ -1,21 +1,20 @@
-<h1>Nuestros Productos</h1>
+<h1>NUESTROS PRODUCTOS</h1>
 <div class="toggle">
     <mat-button-toggle-group [formControl]="filterControl">
         <mat-button-toggle *ngFor="let cat of this.categorias" [value]="cat.nombre">{{cat.nombre}}</mat-button-toggle>
       </mat-button-toggle-group>
 </div>
 <div class="container" *ngIf="productos.length !== 0">
-    <mat-card class="card" *ngFor="let product of productos | productsFiltro:filterControl.value" (click)="addCart(product)">
-        <mat-card-header>
+    <mat-card class="card" *ngFor="let product of productos | productsFiltro:filterControl.value">
+        <img *ngIf="product.img" mat-card-image [src]="product.img[0]" alt="producto" loading="lazy" (click)="showDetails(product)">
+        <mat-card-header (click)="showDetails(product)">
             <mat-card-title>{{product.nombre}}</mat-card-title>
         </mat-card-header>
-        <img *ngIf="product.img" mat-card-image [src]="product.img[0]" alt="producto" loading="lazy">
-        <mat-card-content>
+        <mat-card-content (click)="showDetails(product)">
             <p class="precio">{{product.precio | currency}}</p>
-            <!-- <p>{{product.descripcion}}</p> -->
           </mat-card-content>
         <mat-card-actions *ngIf="product.img">
-            <button mat-raised-button color=info>Agregar al carrito</button>
+            <button class="btn" mat-raised-button color=info (click)="addCart(product)">Agregar al carrito</button>
         </mat-card-actions>
     </mat-card>
 </div>

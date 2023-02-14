@@ -1,21 +1,22 @@
-<app-carousel [unitsPerView]="1" [sizing]="['100%','100vh']" [autoplay]="true" [imagenes]="imagenesCarousel" ></app-carousel>
+<app-carousel [unitsPerView]="1" [sizing]="['100%',carouselHeigth]" [autoplay]="true" [imagenes]="imagenesCarousel" ></app-carousel>
 
 <!-- <app-promo></app-promo> -->
 
 <!-- <div class="banner banner1" routerLink="../products"><h2>Conoce mas</h2></div> -->
 
 <div *ngIf="this.products.length > 0" class="carousel">
-<h2>CONOCÉ NUESTRA AMPLIA VARIEDAD DE PRODUCTOS</h2>
-  <app-carousel [dots]="true" [unitsPerView]="5" [sizing]="['100%','20vh']" [autoplay]="true" [imagenes]="this.products">
+<h2>CONOCÉ NUESTRA AMPLIA VARIEDAD DE PROMOCIONES</h2>
+  <app-carousel [dots]="true" [unitsPerView]="itemsPromo" [sizing]="['80%','20vh']" [autoplay]="true" [imagenes]="this.products">
   </app-carousel> 
 </div>
+
 <app-products></app-products>
 
 <div class="banner banner1" routerLink="../products">
   <h2>Trabajamos con las mejores marcas</h2>
 </div>
 
-<app-ingresos></app-ingresos> 
+<app-ingresos class="ingresos"></app-ingresos> 
 
 
 <div class="banner banner2" routerLink="../products">

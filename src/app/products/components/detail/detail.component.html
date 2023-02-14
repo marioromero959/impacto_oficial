@@ -1,5 +1,4 @@
-<mat-dialog-content class="container">
-    <div class="flex-container">
+    <div class="flex-container" *ngIf="product">
         <div class="seleccionador">
             <div *ngFor="let img of product.img; let index = index">
                 <img [src]="img" (click)="changeImg($event,index)" />
@@ -14,11 +13,15 @@
                 <p>{{product.descripcion}}</p>
                 <p>{{product.precio | currency}}</p>
                 <mat-card-actions>
-                    <button mat-raised-button mat-dialog-close color=warn>Volver</button>
-                    <button mat-raised-button color=info (click)="addCart(product)">Agregar</button>
+                    <button mat-raised-button color=warn routerLink="/">Ver más productos</button>
+                    <button class="btn buy-btn" mat-raised-button (click)="addCart()">Agregar al carrito</button>
                 </mat-card-actions>
             </mat-card-content>            
         </div>
     </div>
-</mat-dialog-content>
 
+    <div class="carousel" *ngIf="this.products.length > 0">
+        <h1>OTROS PRODUCTOS QUE TE PUEDEN INTERESAR</h1>
+        <app-carousel [dots]="true" [unitsPerView]="5" [sizing]="['100%','20vh']" [autoplay]="true" [imagenes]="this.products">
+        </app-carousel> 
+    </div>

@@ -22,5 +22,4 @@ export class IngresosComponent implements OnInit {
       }
     })
   }
-//ver length para poner los ultimos
 }
