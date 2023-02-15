@@ -48,27 +48,13 @@ section{
   align-items: center;
 }
 
-.redes{
-  border-top: .1px groove #000;
-  width: 100%;
-  height: 7%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  img{
-    width: 40px;
-  }
-  p{
-    font-size: 25px;
-    margin: 0;
-    font-family:var(--primary-font);
-  }
-}
+
 .banner{
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 90%;
+  margin: auto;
   height: 150px;
   h2{
     text-align: center;
@@ -78,15 +64,27 @@ section{
     color: #fff;
   }
 }
-.banner1{
-  background: url(../../../../assets/productos_impacto/impacto_auris4.jpg) no-repeat scroll;
-  background-size: cover;
 
+.banner-container {
+  background-color: #f8f8f8;
+  text-align: center;
+  padding: 20px;
 }
-.banner2{
-  background: url(../../../../assets/productos_impacto/impacto_auris3.jpg) no-repeat scroll;  
-  background-size: cover;
+
+.logos-container {
+  max-width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
+
+.logos-container img {
+  width: 120px;
+  height: 100px;
+}
+
+
 
 @media(max-width:480px){
   .firstBanner{
@@ -118,15 +116,6 @@ section{
     display: flex;
   }
 
-  .redes{
-    height: 7%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    img{
-      width: 40px;
-    }
-  }
   .descuento{
     text-align: center;
     height: 40px;
