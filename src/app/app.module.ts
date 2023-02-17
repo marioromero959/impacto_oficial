@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LayoutComponent } from './layout/layout.component';
 import { InterceptorInterceptor } from './services/interceptor/interceptor.interceptor';
 import { ModalComponent } from './modalError/modal/modal.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ModalComponent } from './modalError/modal/modal.component';
     MaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SharedModule
   ],
   providers: [/* {
     provide: HTTP_INTERCEPTORS,

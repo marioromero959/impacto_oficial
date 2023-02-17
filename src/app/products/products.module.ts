@@ -9,6 +9,7 @@ import { DetailComponent } from './components/detail/detail.component';
 import { ProductsPipe } from './pipes/products.pipe';
 import { PromoComponent } from './components/promo/promo.component';
 import { CarouselComponent } from '../home/componentes/carousel/carousel.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { CarouselComponent } from '../home/componentes/carousel/carousel.compone
     CommonModule,
     ProductsRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   exports:[
     PromoComponent,

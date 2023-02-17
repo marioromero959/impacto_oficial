@@ -19,6 +19,7 @@ footer {
   }
   
   .footer-container h3 {
+    color: var(--primary);
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -47,6 +48,14 @@ footer {
     }
 }
   
+
+@media(max-width:480px){
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
   .redes{
     border-top: .1px groove #000;
     width: 100%;

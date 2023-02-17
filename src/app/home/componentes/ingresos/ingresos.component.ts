@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/products/services/products.service';
 import { filter } from 'rxjs/operators';
 import { Producto } from 'src/app/shared/producto-interface';
+import { Productos } from 'src/app/admin/interface/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ingresos',
@@ -12,7 +14,7 @@ export class IngresosComponent implements OnInit {
 
   productos:Producto[] = []
 
-  constructor(private productsSvc:ProductsService) { }
+  constructor(private productsSvc:ProductsService,private router:Router) { }
 
   ngOnInit(): void {
     this.productsSvc.getAllProductsapi().subscribe((res:Producto[])=>{
@@ -22,4 +24,7 @@ export class IngresosComponent implements OnInit {
       }
     })
   }
+  showDetails(index:number){
+    this.router.navigate([`products/${this.productos[index]._id}`])
+ }
 }

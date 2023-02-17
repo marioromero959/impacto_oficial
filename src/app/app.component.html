@@ -1,3 +1,4 @@
 <app-layout class="layout"></app-layout>
 <router-outlet class="router"></router-outlet>
-<app-footer></app-footer>
+<app-footer *ngIf="!showSpinner"></app-footer>
+<app-loader [showSpinner]="showSpinner"></app-loader>

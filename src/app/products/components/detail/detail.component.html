@@ -1,27 +1,28 @@
-    <div class="flex-container" *ngIf="product">
-        <div class="seleccionador">
-            <div *ngFor="let img of product.img; let index = index">
-                <img [src]="img" (click)="changeImg($event,index)" />
-            </div>
-        </div>
-        <div class="img">
-            <img [src]="product.img[index]" alt="product.description" loading="lazy" class="c2">
-        </div>
-        <div class="datos">
-            <mat-card-content class="content">
-                <p><strong>{{product.nombre}}</strong></p>
-                <p>{{product.descripcion}}</p>
-                <p>{{product.precio | currency}}</p>
-                <mat-card-actions>
-                    <button mat-raised-button color=warn routerLink="/">Ver más productos</button>
-                    <button class="btn buy-btn" mat-raised-button (click)="addCart()">Agregar al carrito</button>
-                </mat-card-actions>
-            </mat-card-content>            
+<div class="flex-container" *ngIf="product">
+    <div class="seleccionador">
+        <div *ngFor="let img of product.img; let index = index">
+            <img [src]="img" (click)="changeImg($event,index)" />
         </div>
     </div>
+    <div class="img">
+        <img [src]="product.img[index]" alt="product.description" loading="lazy" class="c2">
+    </div>
+    <div class="datos">
+        <mat-card-content class="content">
+            <p><strong>{{product.nombre}}</strong></p>
+            <p>{{product.descripcion}}</p>
+            <p>{{product.precio | currency}}</p>
+            <mat-card-actions>
+                <button mat-raised-button color=warn routerLink="/">Ver más productos</button>
+                <button class="btn buy-btn" mat-raised-button (click)="addCart()">Agregar al carrito</button>
+            </mat-card-actions>
+        </mat-card-content>
+    </div>
+</div>
 
-    <div class="carousel" *ngIf="this.products.length > 0">
-        <h1>OTROS PRODUCTOS QUE TE PUEDEN INTERESAR</h1>
-        <app-carousel [dots]="true" [unitsPerView]="5" [sizing]="['100%','20vh']" [autoplay]="true" [imagenes]="this.products">
-        </app-carousel> 
-    </div>
+<div class="carousel" *ngIf="this.products.length > 0">
+    <h1>OTROS PRODUCTOS QUE TE PUEDEN INTERESAR</h1>
+    <app-carousel [dots]="true" [unitsPerView]="5" [sizing]="['100%','20vh']" [autoplay]="true"
+        [imagenes]="this.products">
+    </app-carousel>
+</div>

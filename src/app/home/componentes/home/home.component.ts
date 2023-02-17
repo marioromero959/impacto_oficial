@@ -26,7 +26,8 @@ export class HomeComponent implements OnInit {
   constructor(private productSvc:ProductsService) {}
 
   ngOnInit(): void {
-    // this.carouselHeigth = (window.innerWidth < 767) ? '30vh' : '100vh;'
+    this.carouselHeigth = (window.innerWidth < 767) ? '30vh' : '100vh';
+    this.itemsPromo = (window.innerWidth < 767) ? 1 : 5;
     this.productSvc.getAllProductsapi()
     .subscribe(res=>{
       this.products = res.map(el=>{

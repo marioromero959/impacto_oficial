@@ -1,7 +1,6 @@
 <h2>NUEVOS INGRESOS</h2>
 <div class="offer">
-
-    <div class="container card" *ngIf="productos.length > 1">
+    <div class="container" *ngIf="productos.length > 1" (click)="this.showDetails(0)">
         <div class="card_left">
             <img [src]="this.productos[0]?.img[0]">
         </div>
@@ -18,7 +17,7 @@
         </div>
     </div>
 
-    <div class="container card" *ngIf="productos.length > 1">
+    <div class="container" *ngIf="productos.length > 1" (click)="this.showDetails(1)">
         <div class="card_left">
             <img [src]="this.productos[1]?.img[0]">
         </div>
