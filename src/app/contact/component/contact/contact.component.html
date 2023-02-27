@@ -1,7 +1,6 @@
 <div class="contact">
 <div class="container">
     <h1>Envianos un email</h1>
-    <h2 *ngIf="enviado">¡Gracias, tu email fue enviado con exito!</h2>
     <form [formGroup]="contacto">
         <mat-form-field appearance="fill">
             <mat-label>Nombre y Apellido</mat-label>
@@ -10,7 +9,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>
-            <input matInput formControlName="email" placeholder="jhondoe@mail.com">
+            <input matInput formControlName="email" placeholder="example@mail.com">
             <mat-error *ngIf="emailCampo?.invalid">{{errorEmail()}}</mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
@@ -24,10 +23,5 @@
           </mat-form-field>
     </form>
     <button mat-raised-button color="primary" (click)="enviar()">Enviar Mensaje</button>
-</div>
-<div class="container">
-    <h1>O seguinos en </h1>
-    <p>@accesoriosvelka</p>
-    <a class="ig" href="https://www.instagram.com/accesoriosvelka/" target="_blank"><img src="../../../assets/ig-icon.png" alt="logo-whatsapp-velka"></a>
 </div>
 </div>

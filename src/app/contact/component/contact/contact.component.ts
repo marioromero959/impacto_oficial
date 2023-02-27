@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MailService } from 'src/app/services/mail.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class ContactComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private _email: MailService
+    private _email: MailService,
+    private _snackBar: MatSnackBar
     ) {
     this.contacto = this.formBuilder.group({
       nombre: ['',Validators.required],
@@ -45,12 +47,19 @@ export class ContactComponent implements OnInit {
   enviar(){
     if(this.contacto.valid){
       this._email.enviarMail(this.contacto.value).subscribe((res:any)=>{
-        console.log(res)
+        this.openSnackBar("Email enviado correctamente",2000);
+        this.contacto.reset();
+        this.enviado = true;
       });
-      this.contacto.reset();
-      this.enviado = true;
     }else{
       this.contacto.markAllAsTouched();
     }
   } 
+  openSnackBar(message:string,duration) {
+    this._snackBar.open(message, '', {
+      horizontalPosition:'center',
+      verticalPosition: 'top',
+      duration:duration
+    });
+  }
 }
