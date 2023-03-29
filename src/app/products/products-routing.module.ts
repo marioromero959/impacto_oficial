@@ -10,6 +10,10 @@ const routes: Routes = [
     component:ProductsComponent
   },
   {
+    path: 'categoria/:category',
+    component:ProductsComponent
+  },
+  {
     path: 'preventa',
     component:PromoComponent
   },

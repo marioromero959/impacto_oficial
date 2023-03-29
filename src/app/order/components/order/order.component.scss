@@ -3,7 +3,7 @@ mat-stepper{
     min-height: 100vh;
     height: max-content;
     margin: auto;
-    padding-top: 125px;
+    padding-top: 85px;
 }
 .card{
     display: flex;
@@ -68,6 +68,9 @@ form{
     align-items: center;
     justify-content: space-evenly;
     margin: 5px;
+    button{
+        margin: 5px;
+    }
 }
 // Sacar flechitas de input number
 input::-webkit-outer-spin-button,
@@ -108,6 +111,6 @@ h4{
     }
     .step{
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
 }

@@ -15,7 +15,7 @@
     <li>
       <a class="animenu__nav__hasDropdown" aria-haspopup="true">Productos</a>
       <ul class="animenu__nav__dropdown" aria-label="submenu" role="menu">
-        <li *ngFor="let cat of this.categorias"><a href="#" role="menuitem">{{cat}}</a></li>
+        <li *ngFor="let cat of this.categorias"><a routerLink="products/categoria/{{cat}}" role="menuitem">{{cat}}</a></li>
       </ul>
     </li>
     <li><a routerLink="/contact">Contacto</a></li>
