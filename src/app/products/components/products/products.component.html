@@ -1,4 +1,4 @@
-<h1>NUESTROS PRODUCTOS</h1>
+<!-- <h1>NUESTROS PRODUCTOS</h1> -->
 <div class="toggle" *ngIf="this.showSelector; else title">
     <mat-button-toggle-group [formControl]="filterControl">
         <mat-button-toggle *ngFor="let cat of this.categorias" [value]="cat.nombre">{{cat.nombre}}</mat-button-toggle>

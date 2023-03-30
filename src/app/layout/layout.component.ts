@@ -1,6 +1,7 @@
 import { Component, OnInit, Renderer2, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Router} from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { NavigationEnd, Router} from '@angular/router';
 import { OrderService } from '../services/order/order.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Productos } from 'src/app/admin/interface/product';
@@ -57,6 +58,17 @@ export class LayoutComponent implements OnInit {
   ngOnInit() {
     this.adminSvc.getCategories().subscribe((res) => {
       this.categorias = res['categorias'].map((c) => c.nombre);
+    });
+    this.subChanges()
+  }
+
+  subChanges() {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(event => {
+      //cada que cambia la ruta, cerramos el menu
+      this.render.removeClass(this.nav.nativeElement, "animenu__nav--active");
+      this.render.removeClass(this.menuButton.nativeElement, "animenu__btn--active");
     });
   }
 
