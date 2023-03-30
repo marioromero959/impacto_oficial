@@ -31,11 +31,11 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     SharedModule
   ],
-  providers: [/* {
+  providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass:InterceptorInterceptor,
     multi: true,
-  } */],
+  }],
 
   bootstrap: [AppComponent]
 })

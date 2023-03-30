@@ -8,37 +8,38 @@ import {
   HttpHeaders
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, finalize } from 'rxjs/operators';
 import {Router,ActivatedRoute} from '@angular/router'
+import { SpinnerService } from '../spinner/spinner.service';
 
 @Injectable({providedIn:'root'})
 export class InterceptorInterceptor implements HttpInterceptor {
 
-  constructor(private router:Router,private route:ActivatedRoute) {}
+  constructor(private router:Router,private route:ActivatedRoute, private spinnerSvc:SpinnerService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    
-    let token = localStorage.getItem('token');
-    
-    let headers = new HttpHeaders({
-      'x-token': token
-    });
+    this.spinnerSvc.show();
 
-    const reqClone = req.clone({
-      headers:headers
-    });
+    // let token = localStorage.getItem('token');
+    
+    // let headers = new HttpHeaders({
+    //   'x-token': token
+    // });
 
-    return next.handle(reqClone).pipe(
-      catchError((err)=>{
-        // if(this.router.url == '/register'){
-          // return throwError(err.error.errors[0].msg);
-        // }
-        // if(this.router.url == '/login'){
-          // return throwError(err.error.msg); 
-        // }
-        return throwError(err); 
+    // const reqClone = req.clone({
+    //   headers:headers
+    // });
+
+    // return next.handle(reqClone).pipe(
+    //   catchError((err)=>{
+    //     return throwError(err); 
+    //   })
+    // );
+
+    return next.handle(req).pipe(
+      finalize(()=>{
+        this.spinnerSvc.hide()
       })
-    );
-
+    )
   }
 }
