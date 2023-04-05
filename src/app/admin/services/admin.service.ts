@@ -42,6 +42,9 @@ export class AdminService {
     const headers = new HttpHeaders({
       'x-token':localStorage.getItem('token')
     })
+    console.log("prod",product);
+    console.log("head",product);
+    
     return this.http.post(`${environment.API}/api/productos`,product,{headers})
   }
   

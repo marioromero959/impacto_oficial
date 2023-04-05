@@ -22,7 +22,11 @@
     <li>
       <a mat-button color="primary" [matMenuTriggerFor]="menu">Carrito<mat-icon
         [matBadge]="badge()">shopping_cart</mat-icon></a>
-    </li>
+      </li>
+    <div class="spacer"></div>
+    <li *ngIf="!existsToken"><a routerLink="/login">Ingresar</a></li>
+    <li *ngIf="!existsToken"><a routerLink="/register">Registrarse</a></li>
+    <li (click)="outSession()" *ngIf="existsToken"><a>Cerrar Sesion</a></li>
     <mat-menu #menu>
       <div class="order">
         <p><strong>TOTAL: {{total() | currency}}</strong></p>

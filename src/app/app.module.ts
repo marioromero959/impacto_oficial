@@ -12,6 +12,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { InterceptorInterceptor } from './services/interceptor/interceptor.interceptor';
 import { ModalComponent } from './modalError/modal/modal.component';
 import { SharedModule } from './shared/shared.module';
+import { EnviosComponent } from './envios/components/envios/envios.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { SharedModule } from './shared/shared.module';
     LayoutComponent,
     AppComponent,
     ModalComponent,
+    EnviosComponent,
   ],
   imports: [
     BrowserModule,

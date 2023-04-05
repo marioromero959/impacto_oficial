@@ -24,6 +24,7 @@ export class LayoutComponent implements OnInit {
   session: string = 'Iniciar'
   count
   categorias
+  existsToken:boolean = false;
 
   @ViewChild('nav') nav: ElementRef;
   @ViewChild('menuButton') menuButton: ElementRef;
@@ -39,14 +40,9 @@ export class LayoutComponent implements OnInit {
     this.products$.subscribe(products => {
       this.productos = products;
     })
-    this.token = localStorage.getItem('token');
-    this.loginSvc.user$.subscribe(res => {
-      if (res || this.token) {
-        this.session = 'Cerrar'
-      }
-    })
+      this.existsToken = localStorage.getItem('token') ? true : false; 
+    }
 
-  }
   @HostListener('window:resize', ['$event'])
   getScreenSize(event?) {
     if(window.innerWidth > 767){
@@ -65,7 +61,8 @@ export class LayoutComponent implements OnInit {
   subChanges() {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
-    ).subscribe(event => {
+      ).subscribe(event => {
+      this.existsToken = localStorage.getItem('token') ? true : false; 
       //cada que cambia la ruta, cerramos el menu
       this.render.removeClass(this.nav.nativeElement, "animenu__nav--active");
       this.render.removeClass(this.menuButton.nativeElement, "animenu__btn--active");
@@ -95,12 +92,10 @@ export class LayoutComponent implements OnInit {
   }
 
   outSession() {
-    if (this.session === 'Cerrar') {
       localStorage.removeItem('token')
       localStorage.removeItem('currentUserEmail')
       localStorage.removeItem('currentUserName')
-      this.session = 'Iniciar'
-    }
+      window.location.reload()
   }
 
 

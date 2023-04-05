@@ -15,8 +15,8 @@
     align-items: center;
 }
 h1{
-    font-size: 50px;
-    color: #000;
+    font-size: 40px;
+    color: var(--primary);
     text-align: center;
     padding: 20px;    
     font-family: var(--primary-font);
@@ -24,6 +24,7 @@ h1{
     border-radius: 15px;
 }
 span{
+    text-transform: uppercase;
     color: #fff;
 }
 form{

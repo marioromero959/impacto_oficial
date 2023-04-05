@@ -183,6 +183,10 @@ $gutter: 10px; // Base gutter
   }
 }
 
+.spacer{
+  flex: 1 1 0;
+}
+
 @media screen and (max-width: 767px) {
   .animenu__btn {
     display: inline-block;

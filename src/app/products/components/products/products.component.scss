@@ -12,7 +12,7 @@ h1{
 }
 
 h1:nth-child(1){
-    margin-top: 50px;
+    margin-top: 90px;
     padding: 20px;
     color: var(--primary);
     font-family: var(--primary-font);
@@ -74,6 +74,9 @@ img{
       }
 }
 @media(max-width:480px){
+    h1:nth-child(1){
+        margin-top: 50px;
+    }
     mat-card-actions{
         display: flex;
         flex-direction: column;

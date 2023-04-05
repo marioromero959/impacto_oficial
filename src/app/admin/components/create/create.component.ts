@@ -23,7 +23,6 @@ export class CreateComponent implements OnInit {
   imagenesProducto: File[] = [];
   blobs = [];
   viewImg: any = '../../../../assets/no-img.png';
-  showSpinner: boolean = false;
   categorias = [];
   stockProducto:number = 0;
 
@@ -78,15 +77,12 @@ export class CreateComponent implements OnInit {
     if (this.formularioCategoria.get(['crear', 'nombre']).invalid) {
       this.formularioCategoria.get(['crear']).markAllAsTouched();
     } else {
-      this.showSpinner = true;
       this.adminSvc.addCategory(this.formularioCategoria.value.crear).subscribe(
         (res) => {
-          this.showSpinner = false;
           this.openSnackBar('¡Categoria creada correctamente!');
           this.getAllcategories();
         },
         (err) => {
-          this.showSpinner = false;
           this.dialog.open(ModalComponent, {
             disableClose: false,
             data: err.error.msg,
@@ -100,17 +96,14 @@ export class CreateComponent implements OnInit {
     if (this.formularioCategoria.get(['editar']).invalid) {
       this.formularioCategoria.get(['editar']).markAllAsTouched();
     } else {
-      this.showSpinner = true;
       this.adminSvc
         .editCategory(this.formularioCategoria.value.editar)
         .subscribe(
           (res) => {
-            this.showSpinner = false;
             this.openSnackBar('¡Categoria editada correctamente!');
             this.getAllcategories();
           },
           (err) => {
-            this.showSpinner = false;
             this.dialog.open(ModalComponent, {
               disableClose: false,
               data: err.error.msg,
@@ -124,17 +117,14 @@ export class CreateComponent implements OnInit {
     if (this.formularioCategoria.get(['eliminar']).invalid) {
       this.formularioCategoria.get(['eliminar']).markAllAsTouched();
     } else {
-      this.showSpinner = true;
       this.adminSvc
         .deleteCategory(this.formularioCategoria.value.eliminar)
         .subscribe(
           (res) => {
-            this.showSpinner = false;
             this.openSnackBar('¡Categoria eliminada correctamente!');
             this.getAllcategories();
           },
           (err) => {
-            this.showSpinner = false;
             this.dialog.open(ModalComponent, {
               disableClose: false,
               data: err.error.msg,
@@ -184,35 +174,33 @@ export class CreateComponent implements OnInit {
     if (this.formularioProducto.invalid) {
       this.formularioProducto.markAllAsTouched();
     } else {
-      this.showSpinner = true;
       const { categoria, nombre, precio, stock, descripcion } = this.formularioProducto.value;
-      
       const product = { nombre, categoria, precio, stock, descripcion };
-      this.adminSvc.addProduct(product).subscribe(
-        (res: any) => {
-          this.showSpinner = false;
-          if (this.imagenesProducto.length > 8) {
-            this.openSnackBar(
-              'Se pueden agregar solo hasta 8 imagenes por producto!'
-            );
-          } else {
-            this.adminSvc
-              .uploadProductImg(this.imagenesProducto, res._id)
-              .then((img) => {
-                this.openSnackBar('Producto creado correctamente!');
-                this.formularioProducto.reset();
-              })
-              .catch((error) => console.error(error));
-          }
-        },
-        (err) => {
-          this.showSpinner = false;
-          this.dialog.open(ModalComponent, {
-            disableClose: false,
-            data: err.error.msg,
-          });
+      console.log("callfn");
+      
+      this.adminSvc.addProduct(product)
+      .subscribe({
+        next:(res:any)=>{
+        if (this.imagenesProducto.length > 8) {
+          this.openSnackBar('Se pueden agregar solo hasta 8 imagenes por producto!');
+        } else {
+          this.adminSvc
+            .uploadProductImg(this.imagenesProducto, res._id)
+            .then((img) => {
+              this.openSnackBar('Producto creado correctamente!');
+              this.formularioProducto.reset();
+            })
+            .catch((error) => console.error(error));
         }
-      );
+        },
+        error:err=>{
+           console.log("err",err);
+           this.dialog.open(ModalComponent, {
+             disableClose: false,
+             data: err,
+           });
+        }
+      });
     }
   }
 }
