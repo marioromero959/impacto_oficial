@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   API : 'http://localhost:8080',
-  MP:'APP_USR-1912252141715650-020122-e2a36346f62931d02d5709e9b5c1d774-176842356'
+  MP:'APP_USR-1912252141715650-020122-e2a36346f62931d02d5709e9b5c1d774-176842356',
+  API_ANDREANI:'https://apisqa.andreani.com/v1'
 };
 
 /*

@@ -95,23 +95,17 @@ $gutter: 10px; // Base gutter
     }
 
     &:hover {
-      >ul {
-        opacity: 1;
-        visibility: visible;
-        margin: 0;
-      }
-
       >a {
         color: #fff;
       }
     }
 
     &:focus-within {
-      >ul {
-        opacity: 1;
-        visibility: visible;
-        margin: 0;
-      }
+      // >ul {
+      //   opacity: 1;
+      //   visibility: visible;
+      //   margin: 0;
+      // }
 
       >a {
         color: #fff;
@@ -130,6 +124,8 @@ $gutter: 10px; // Base gutter
     right: 10px;
   }
 }
+
+
 
 .animenu__nav__dropdown {
   min-width: 100%;
@@ -182,6 +178,7 @@ $gutter: 10px; // Base gutter
     }
   }
 }
+
 
 .spacer{
   flex: 1 1 0;
@@ -272,22 +269,18 @@ $gutter: 10px; // Base gutter
         visibility: hidden;
         margin: 0;
         transition: .2s;
-
         a {
           display: none;
         }
       }
 
-      &:hover {
-        ul {
+      .show {
           opacity: 1;
           visibility: visible;
           margin: 0;
-
           a {
             display: block;
           }
-        }
       }
 
     }
@@ -345,4 +338,10 @@ $gutter: 10px; // Base gutter
     margin: 0;
     width: 50px;
   }
+}
+
+.show{
+  opacity: 1;
+  visibility: visible;
+  margin: 0;
 }

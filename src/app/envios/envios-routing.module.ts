@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EnviosComponent } from './components/envios/envios.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    component:EnviosComponent
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

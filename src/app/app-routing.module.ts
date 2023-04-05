@@ -43,6 +43,11 @@ const routes: Routes = [
       loadChildren: () => import('./detalle-pago/detalle-pago.module').then(m => m.DetallePagoModule),
       data: { animation: 'animationOrder' }
     },
+        {
+      path: 'envios',
+      loadChildren: () => import('./envios/envios.module').then(m => m.EnviosModule),
+      data: { animation: 'animationOrder' }
+    },
   {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)

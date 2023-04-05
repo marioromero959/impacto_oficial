@@ -65,7 +65,7 @@
         <div class="container">
           <div *ngFor="let product of products">
               <p><strong>{{product.cantidad}}</strong> {{product.nombre}}</p>
-              <p>{{product.precio*product.cantidad | currency}} c/u </p>
+              <p>{{product.precio*product.cantidad | currency}}</p>
             </div>
             <hr>
           <h3 *ngIf="products.length !== 0">El total a pagar es de:{{total() | currency}}</h3>

@@ -25,9 +25,11 @@ export class LayoutComponent implements OnInit {
   count
   categorias
   existsToken:boolean = false;
+  subMenuOpen:boolean = false;
 
   @ViewChild('nav') nav: ElementRef;
   @ViewChild('menuButton') menuButton: ElementRef;
+  @ViewChild('productSubMenu') productSubMenu: ElementRef;
 
   constructor(
     private adminSvc: AdminService,
@@ -108,5 +110,15 @@ export class LayoutComponent implements OnInit {
       this.render.removeClass(event.target, "animenu__btn--active");
     }
   }
+
+    triggerProudctMenu(){
+      this.subMenuOpen = !this.subMenuOpen;
+      if(this.subMenuOpen){
+        this.render.addClass(this.productSubMenu.nativeElement, "show");
+      }else{
+        this.render.removeClass(this.productSubMenu.nativeElement, "show");
+      }
+      
+    }
 
 }
