@@ -66,6 +66,7 @@ export class LayoutComponent implements OnInit {
       ).subscribe(event => {
       this.existsToken = localStorage.getItem('token') ? true : false; 
       //cada que cambia la ruta, cerramos el menu
+      this.render.removeClass(this.productSubMenu.nativeElement, "show");
       this.render.removeClass(this.nav.nativeElement, "animenu__nav--active");
       this.render.removeClass(this.menuButton.nativeElement, "animenu__btn--active");
     });

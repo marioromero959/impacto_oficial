@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { filter,map } from 'rxjs/operators';
 
 @Injectable({
@@ -10,8 +10,13 @@ export class ProductsService {
 
   constructor(private http:HttpClient) { }
 
-  getAllProductsapi(){
-    return this.http.get(`${environment.API}/api/productos`)
+  getAllProductsapi(limite:number = 15,desde:number = 0){
+    
+    const params = new HttpParams()
+    .set('limite', limite)
+    .set('desde', desde);
+
+    return this.http.get(`${environment.API}/api/productos/getAllProducts`,{params})
     .pipe(map((res:any)=> res.productos));
   }
   getProductapi(id){

@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Inject,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
+import { Component,Inject,ViewChild,ElementRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../../services/admin.service';
@@ -15,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent{
   formularioProducto: FormGroup;
   imagenProducto: File;
 
@@ -27,7 +21,6 @@ export class ModalComponent implements OnInit {
   viewImg: any = '../../../../assets/no-img.png';
   categorias = [];
   id: string = '';
-  showSpinner: boolean = false;
   mode: 'indeterminate';
 
   @ViewChild('fileInput') fileInput: ElementRef;
@@ -47,9 +40,7 @@ export class ModalComponent implements OnInit {
       img: [''],
       descripcion: [''],
     });
-  }
 
-  ngOnInit(): void {
     this.data.img.forEach((urlImg) => {
       this.showImagenes.push(urlImg);
     });
@@ -126,7 +117,6 @@ export class ModalComponent implements OnInit {
     if (this.formularioProducto.invalid) {
       this.formularioProducto.markAllAsTouched();
     } else {
-      this.showSpinner = true;
       const { categoria, nombre,stock, precio, descripcion } =
         this.formularioProducto.value;
       const product = {
@@ -145,19 +135,16 @@ export class ModalComponent implements OnInit {
               this.openSnackBar(
                 'Se pueden agregar solo hasta 8 imagenes por producto!'
               );
-              this.showSpinner = false;
             } else {
               this.adminSvc
                 .uploadProductImg(this.imagenesProducto, res._id, this.borradas)
                 .then((producto) => {
-                  this.showSpinner = false;
                   this.dialogRef.close(producto.modelo);
                   this.openSnackBar('¡Producto editado correctamente!');
                 })
                 .catch((error) => console.error(error));
             }
           } else {
-            this.showSpinner = false;
             this.openSnackBar('¡Producto editado correctamente!');
             this.dialogRef.close(res);
           }

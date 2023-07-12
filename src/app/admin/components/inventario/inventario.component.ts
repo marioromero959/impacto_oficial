@@ -4,6 +4,7 @@ import { ProductsService } from 'src/app/products/services/products.service';
 import { Productos } from '../../interface/product';
 import { AdminService } from '../../services/admin.service';
 import { ModalComponent } from '../modal/modal.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-inventario',
@@ -13,6 +14,7 @@ import { ModalComponent } from '../modal/modal.component';
 export class InventarioComponent implements OnInit {
 
   productos:Productos[]
+  busquedaProductos = new FormControl('')
 
   constructor(private productSvc:ProductsService,
     private adminSvc:AdminService,
@@ -20,8 +22,6 @@ export class InventarioComponent implements OnInit {
     ) { 
     this.productSvc.getAllProductsapi()
     .subscribe((productos:Productos[])=>{
-      console.log(productos);
-      
     this.productos = productos
     })
   }
@@ -33,6 +33,7 @@ export class InventarioComponent implements OnInit {
   editarProducto(producto){
     const dialogRef = this.dialog.open(ModalComponent,{
       disableClose:false,
+      minWidth:"90%",
       data:producto,
     }); 
     dialogRef.afterClosed().subscribe(result => {

@@ -32,15 +32,20 @@ export class ChartsComponent implements OnInit {
   obtenerDatosCompra(){
     this.adminSvc.obtenerDatosCompra().pipe
     (map((data:any) => data.results))
-    // filter(item => item == "MERCPAGO*VELKAHANDMADE")
     .subscribe((items:any) =>{
-      // console.log("items",items.map(i=>{
-      // return {'data':i.metadata,'info':i.metadata}
-      // }));
-      this.soldProducts = items.filter(item => item.statement_descriptor === "MERCPAGO*VELKAHANDMADE")
-                               .map(item =>item.additional_info.items).filter(element=>element !== undefined);
+
+      // console.log("items",items.map(i=>i.point_of_interaction).filter(el=>el).map(el=>el.business_info));
+        // {unit: 'online_payments', sub_unit: 'checkout_pro'}
+        this.soldProducts =  items.filter(el=>{
+          return el.point_of_interaction
+        })
+
+
+      //  this.soldProducts = items.filter(item => item.statement_descriptor === "MERPAGO*IMPACTOTIENDA")
+                              //  .map(item =>item.additional_info.items).filter(element=>element !== undefined);
+      console.log(this.soldProducts.splice(0,1));
       
-      this.imprimirArr()
+       this.imprimirArr()
     })
   }
 

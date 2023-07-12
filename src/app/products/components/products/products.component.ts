@@ -23,6 +23,7 @@ export class ProductsComponent implements OnInit {
   categorias: any = []
   showProducts = true;
   showSelector:boolean = true;
+  totalProducts:number = 0
 
   constructor(
     private productSvc: ProductsService,
@@ -60,8 +61,10 @@ export class ProductsComponent implements OnInit {
 
   cargarDatosGenerales(): Observable<any> {
     const datosGenerales = forkJoin({
-      productos: this.productSvc.getAllProductsapi().pipe(
+      productos: this.productSvc.getAllProductsapi(2,2).pipe(
         map((res) => {
+          console.log(res);
+          
           this.productos = res;
         })
       ),

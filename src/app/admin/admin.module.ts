@@ -12,15 +12,16 @@ import { ModalComponent } from './components/modal/modal.component';
 import { ChartsComponent } from './components/charts/charts.component';
 // import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FilterPipe } from '../shared/filter.pipe';
 
 @NgModule({
-  declarations: [NavComponent, CreateComponent, DashboardComponent, InventarioComponent, ModalComponent, ChartsComponent],
+  declarations: [NavComponent, CreateComponent, DashboardComponent, InventarioComponent, ModalComponent, ChartsComponent,FilterPipe],
   imports: [
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
     MaterialModule,
     // NgxChartsModule,
-  ]
+  ],
 })
 export class AdminModule { }
