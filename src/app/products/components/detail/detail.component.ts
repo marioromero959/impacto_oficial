@@ -4,7 +4,7 @@ import { OrderService } from 'src/app/services/order/order.service';
 import { ProductsService } from '../../services/products.service';
 import { Productos } from 'src/app/admin/interface/product';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { filter } from 'rxjs/operators';
+import { filter,map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-detail',
@@ -32,6 +32,7 @@ export class DetailComponent implements OnInit {
     const id = this.route.snapshot.params['id'];
     this.getProduct(id)
     this.productSvc.getAllProductsapi()
+    .pipe(map((res:any)=> res.productos))
     .subscribe(res=>{
       this.products = res.map(el=>{
         let obj = el;

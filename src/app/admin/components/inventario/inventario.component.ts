@@ -5,6 +5,8 @@ import { Productos } from '../../interface/product';
 import { AdminService } from '../../services/admin.service';
 import { ModalComponent } from '../modal/modal.component';
 import { FormControl } from '@angular/forms';
+import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-inventario',
@@ -21,6 +23,7 @@ export class InventarioComponent implements OnInit {
     public dialog:MatDialog,
     ) { 
     this.productSvc.getAllProductsapi()
+    .pipe(map((res:any)=> res.productos))
     .subscribe((productos:Productos[])=>{
     this.productos = productos
     })
@@ -39,6 +42,7 @@ export class InventarioComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result){
         this.productSvc.getAllProductsapi()
+        .pipe(map((res:any)=> res.productos))
         .subscribe((productos:Productos[])=>{
         this.productos = productos
         })

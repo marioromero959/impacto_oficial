@@ -4,6 +4,7 @@ import { filter } from 'rxjs/operators';
 import { Producto } from 'src/app/shared/producto-interface';
 import { Productos } from 'src/app/admin/interface/product';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators'
 
 @Component({
   selector: 'app-ingresos',
@@ -17,7 +18,9 @@ export class IngresosComponent implements OnInit {
   constructor(private productsSvc:ProductsService,private router:Router) { }
 
   ngOnInit(): void {
-    this.productsSvc.getAllProductsapi().subscribe((res:Producto[])=>{
+    this.productsSvc.getAllProductsapi()
+    .pipe(map((res:any)=> res.productos))
+    .subscribe((res:Producto[])=>{
       if(res.length > 1){
         this.productos.push(res[res.length-1])
         this.productos.push(res[res.length-2])

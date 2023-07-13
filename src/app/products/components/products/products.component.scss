@@ -73,7 +73,9 @@ img{
     align-items: center;
     justify-content: center;
 }
-
+::ng-deep .mat-paginator-page-size {
+    display: none !important;
+  }
 
 //agrego el hover del boton solo para pantallas grandes
 @media(min-width:780px){

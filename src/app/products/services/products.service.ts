@@ -10,14 +10,14 @@ export class ProductsService {
 
   constructor(private http:HttpClient) { }
 
-  getAllProductsapi(limite:number = 15,desde:number = 0){
+  getAllProductsapi(limite:number = 15,desde:number = 0,categoria?){
     
     const params = new HttpParams()
     .set('limite', limite)
-    .set('desde', desde);
-
+    .set('desde', desde)
+    .set('category', categoria);
+    
     return this.http.get(`${environment.API}/api/productos/getAllProducts`,{params})
-    .pipe(map((res:any)=> res.productos));
   }
   getProductapi(id){
     return this.http.get(`${environment.API}/api/productos/${id}`);

@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
     this.carouselHeigth = (window.innerWidth < 767) ? '30vh' : '100vh';
     this.itemsPromo = (window.innerWidth < 767) ? 1 : 5;
     this.productSvc.getAllProductsapi()
+    .pipe(map((res:any)=> res.productos))
     .subscribe(res=>{
       this.products = res.map(el=>{
         let obj = el;

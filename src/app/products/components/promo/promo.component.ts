@@ -5,6 +5,7 @@ import { ProductsService } from '../../services/products.service';
 import { Productos } from 'src/app/admin/interface/product';
 import { DetailComponent } from '../detail/detail.component';
 import { MatDialog } from '@angular/material/dialog';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-promo',
@@ -22,7 +23,9 @@ export class PromoComponent implements OnInit{
     ) { }
 
   ngOnInit(): void {
-    this.productSvc.getAllProductsapi().subscribe(res=>{
+    this.productSvc.getAllProductsapi()
+    .pipe(map((res:any)=> res.productos))
+    .subscribe(res=>{
       this.products = res;
     })
   }
