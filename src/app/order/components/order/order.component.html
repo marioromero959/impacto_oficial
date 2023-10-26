@@ -10,8 +10,8 @@
                   <p>Cantidad:{{product.cantidad}}</p>
                     <p>{{product.precio*product.cantidad | currency}}</p>
                     <mat-card-actions>
-                        <button mat-raised-button (click)="deleteItem(product)">Eliminar</button>
-                        <button mat-raised-button color=primary (click)="addCart(product)">Agregar(+1)</button>
+                        <button class="buy-btn show-more" mat-raised-button (click)="deleteItem(product)">Eliminar</button>
+                        <button class="buy-btn" mat-raised-button color=primary (click)="addCart(product)">Agregar(+1)</button>
                     </mat-card-actions>
                 </mat-card-content>
             </mat-card>
@@ -19,8 +19,8 @@
         </div>
         
         <div class="step">
-          <button mat-raised-button color="warn" (click)="deleteAll()" *ngIf="products.length !== 0">Vaciar carrito</button>
-          <button mat-raised-button matStepperNext [disabled]="products.length === 0">Siguiente</button>
+          <button class="buy-btn show-more" mat-raised-button color="warn" (click)="deleteAll()" *ngIf="products.length !== 0">Vaciar carrito</button>
+          <button class="buy-btn" mat-raised-button matStepperNext [disabled]="products.length === 0">Siguiente</button>
         </div>
     </mat-step>
 
@@ -52,15 +52,15 @@
         <p class="aviso">Por favor, comunicate con nosotros para coordinar la entrega, ¡gracias!</p>
         <a class="logowpplink" href="https://api.whatsapp.com/send/?phone=5493704579432&text&type=phone_number&app_absent=0" target="_blank"><img src="../../../assets/wp-icon.png" alt="logo-whatsapp-velka" class="logowpp"></a>
         <div class="step">
-          <button mat-raised-button matStepperPrevious color="primary">Volver</button>
-          <button mat-raised-button matStepperNext (click)="paid()">Siguiente</button>
+          <button class="buy-btn show-more" mat-raised-button matStepperPrevious color="primary">Volver</button>
+          <button class="buy-btn" mat-raised-button matStepperNext (click)="paid()">Siguiente</button>
         </div>
       </form>
     </mat-step>
 
     <mat-step>
       <ng-template matStepLabel>Hecho</ng-template>
-      <p>¡Ya casi!</p>
+      <p>¡Ya casi! Aca te mostramos tu resumen</p>
       <div class="step">
         <div class="container">
           <div *ngFor="let product of products">
@@ -70,8 +70,8 @@
             <hr>
           <h3 *ngIf="products.length !== 0">El total a pagar es de:{{total() | currency}}</h3>
         </div>
-        <button mat-button matStepperPrevious>Volver</button>
-        <button mat-button id="page-content">Continuar</button>
+        <button class="buy-btn show-more" mat-button matStepperPrevious>Volver</button>
+        <button mat-button id="page-content"></button>
       </div>
       <h4>¡Muchas gracias por confiar en IMPACTO TIENDA, nos comunicamos con vos cuando tu pedido este listo!</h4>
     </mat-step>

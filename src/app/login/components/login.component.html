@@ -16,7 +16,11 @@
     </form>
     <div class="buttons">
         <button mat-raised-button color="primary" (click)="goToHome()">Ingresar</button>
-        <button mat-raised-button color="accent" (click)="goToRegister()">Crea tu cuenta</button>
+        <button mat-raised-button color="accent" (click)="goTo('register')">Crea tu cuenta</button>
+    </div>
+    <div class="password" (click)="goTo('reset-password')">
+        ¿Olvidaste tu contraseña?
     </div>
     </div>
+
 </div>

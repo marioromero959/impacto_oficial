@@ -15,7 +15,6 @@
               <th>Eliminar</th>
             </tr>
             <ng-container *ngIf= "(productos | filter:busquedaProductos.value) as resultado">
-              <!-- <div *ngIf="resultado.length != 0 ; else elseBlock"> -->
                 <tr *ngFor="let producto of productos | filter:busquedaProductos.value; let i = index">
                   <td>{{producto.nombre}}</td>
                   <td>{{producto.stock}}</td>
@@ -24,27 +23,14 @@
                   <th><button mat-icon-button (click)="editarProducto(producto)" color="info">
                     <mat-icon>border_color</mat-icon>
                   </button></th>
-                  <th><button mat-icon-button (click)="borrarProducto(producto._id,i)" color="warn">
+                  <th><button mat-icon-button (click)="borrarProducto(producto,producto._id,i)" color="warn">
                     <mat-icon>delete</mat-icon>
                   </button></th>
                 </tr>
-              <!-- </div> -->
             </ng-container>
             <ng-template #elseBlock>
               <p>No hay coincidencias</p>
               </ng-template>
-            <!-- <tr *ngFor ="let producto of productos; let i = index" class="productos">
-              <td>{{producto.nombre}}</td>
-              <td>{{producto.stock}}</td>
-              <td>{{producto.precio}}</td>
-              <td>{{producto.descripcion}}</td>
-              <th><button mat-icon-button (click)="editarProducto(producto)" color="info">
-                <mat-icon>border_color</mat-icon>
-              </button></th>
-              <th><button mat-icon-button (click)="borrarProducto(producto._id,i)" color="warn">
-                <mat-icon>delete</mat-icon>
-              </button></th>
-            </tr> -->
           </table>
     </div>
 </div>

@@ -13,7 +13,7 @@
             <p>{{product.descripcion}}</p>
             <p>{{product.precio | currency}}</p>
             <mat-card-actions>
-                <button mat-raised-button color=warn routerLink="/products">Ver más productos</button>
+                <button class="btn buy-btn show-more" mat-raised-button color=warn routerLink="/products">Ver más productos</button>
                 <button class="btn buy-btn" mat-raised-button (click)="addCart()">Agregar al carrito</button>
             </mat-card-actions>
         </mat-card-content>
@@ -21,7 +21,7 @@
 </div>
 
 <div class="carousel" *ngIf="this.products.length > 0">
-    <h1>OTROS PRODUCTOS QUE TE PUEDEN INTERESAR</h1>
+    <h2>NO TE PIEDAS NUESTRAS MEJORES OFERTAS</h2>
     <app-carousel [dots]="true" [unitsPerView]="this.perView" [sizing]="['100%','25vh']" [autoplay]="true"
         [imagenes]="this.products">
     </app-carousel>

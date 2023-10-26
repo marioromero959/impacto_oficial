@@ -95,4 +95,12 @@ export class OrderService {
   modalMP(dataCompra){
     return this.http.post<RtaMP>(`${environment.API}/api/order`,dataCompra)
   }
+
+  cargarOrden(ordenId:string){
+    //cargo la orden de compra para compararla despues con los productos vendidos
+    console.log("desde sv.",ordenId);
+    const orderId = {ordenId:ordenId}
+    return this.http.post<any>(`${environment.API}/api/compras/cargarCompra`,orderId)
+  }
+
 }

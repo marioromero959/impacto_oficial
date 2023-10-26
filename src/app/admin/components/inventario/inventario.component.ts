@@ -6,6 +6,7 @@ import { AdminService } from '../../services/admin.service';
 import { ModalComponent } from '../modal/modal.component';
 import { FormControl } from '@angular/forms';
 import { map } from 'rxjs/operators';
+import { ModalErrorComponent } from 'src/app/modalError/modal/modal.component';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class InventarioComponent implements OnInit {
     private adminSvc:AdminService,
     public dialog:MatDialog,
     ) { 
-    this.productSvc.getAllProductsapi()
+    this.productSvc.getAllProductsapi(1000)
     .pipe(map((res:any)=> res.productos))
     .subscribe((productos:Productos[])=>{
     this.productos = productos
@@ -41,7 +42,7 @@ export class InventarioComponent implements OnInit {
     }); 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        this.productSvc.getAllProductsapi()
+        this.productSvc.getAllProductsapi(1000)
         .pipe(map((res:any)=> res.productos))
         .subscribe((productos:Productos[])=>{
         this.productos = productos
@@ -50,12 +51,23 @@ export class InventarioComponent implements OnInit {
     })
   }
 
-  borrarProducto(id,index){
-    this.productos.splice(index,1)
-    this.adminSvc.deleteProduct(id).subscribe(
-      res=>console.log(res),
-      err=>console.log(err)
-    )
+  borrarProducto(producto,id,index){
+      const dialogRef = this.dialog.open(ModalErrorComponent,{
+        disableClose:false,
+        data:{msg:`Esta seguro que desea eliminar el producto ${producto.nombre} definitivamente? `},
+      }); 
+      dialogRef.afterClosed().subscribe(result => {
+        if(result){
+          this.productos.splice(index,1)
+          this.adminSvc.deleteProduct(id).subscribe(
+               {
+               next: (res: Object) => console.log(res),
+               error: (error: any) => console.log(error),
+               complete: () => console.log("complete")
+             }
+           )
+        }
+    })
     
   }
 

@@ -6,14 +6,22 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
 })
-export class ModalComponent implements OnInit {
+export class ModalErrorComponent implements OnInit {
+
+  isInventario:boolean = false
 
   constructor( 
-    public dialogRef: MatDialogRef<ModalComponent>,
+    public dialogRef: MatDialogRef<ModalErrorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any 
     ) {}
 
   ngOnInit(): void {
+    //si tiene la propiedad msg, viene desde eliminar producto en el inventario
+    this.isInventario = (this.data.msg) ? true : false; 
+  }
+
+  close(res){
+    this.dialogRef.close(res)
   }
 
 }

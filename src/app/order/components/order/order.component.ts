@@ -130,6 +130,7 @@ enviar(){
     }
     this.orderSvc.modalMP(dataCompra).subscribe(
       res=>{
+        this.orderSvc.cargarOrden(res.preferenceID).subscribe()
       var script = document.createElement("script");
       script.src = "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
       script.type = "text/javascript";

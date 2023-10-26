@@ -3,7 +3,7 @@ import { RegisterService } from 'src/app/services/register/register.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalComponent } from 'src/app/modalError/modal/modal.component';
+import { ModalErrorComponent } from 'src/app/modalError/modal/modal.component';
 
 
 @Component({
@@ -66,17 +66,19 @@ export class RegisterComponent implements OnInit {
       this.register.markAllAsTouched();
     }else{
       this.registerSvc.register(this.register.value).subscribe(
-        res=>{
-          this.router.navigate(['/login'])
-        },
-        err=>{
-          const dialogRef = this.dialog.open(ModalComponent,{
-            disableClose:false,
-            data:err.error.errors[0].msg
+        {
+          next:(res)=>this.router.navigate(['/login']),
+          error:(err)=>{
+            const dialogRef = this.dialog.open(ModalErrorComponent,{
+              disableClose:false,
+              data:err.error.errors[0].msg
+              });
+            },
+          complete:()=>console.log("complete")
+        }
+      )
 
-            });
-          }
-      )  
+
     } 
   }
 

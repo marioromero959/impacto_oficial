@@ -20,8 +20,8 @@ export class HomeComponent implements OnInit {
   ]
 
   imagenesCarousel = [
-    {img:"../../../../assets/banner1.jpeg"},
-    {img:"../../../../assets/banner2.svg"},
+    {img:"../../../../assets/banner1.png"},
+    {img:"../../../../assets/banner2.png"},
   ]
   constructor(private productSvc:ProductsService) {}
 

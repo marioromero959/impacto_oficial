@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { AdminService } from '../../services/admin.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalComponent } from 'src/app/modalError/modal/modal.component';
+import { ModalErrorComponent } from 'src/app/modalError/modal/modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -83,7 +83,7 @@ export class CreateComponent implements OnInit {
           this.getAllcategories();
         },
         (err) => {
-          this.dialog.open(ModalComponent, {
+          this.dialog.open(ModalErrorComponent, {
             disableClose: false,
             data: err.error.msg,
           });
@@ -104,7 +104,7 @@ export class CreateComponent implements OnInit {
             this.getAllcategories();
           },
           (err) => {
-            this.dialog.open(ModalComponent, {
+            this.dialog.open(ModalErrorComponent, {
               disableClose: false,
               data: err.error.msg,
             });
@@ -125,7 +125,7 @@ export class CreateComponent implements OnInit {
             this.getAllcategories();
           },
           (err) => {
-            this.dialog.open(ModalComponent, {
+            this.dialog.open(ModalErrorComponent, {
               disableClose: false,
               data: err.error.msg,
             });
@@ -176,28 +176,26 @@ export class CreateComponent implements OnInit {
     } else {
       const { categoria, nombre, precio, stock, descripcion } = this.formularioProducto.value;
       const product = { nombre, categoria, precio, stock, descripcion };
-      console.log("callfn");
-      
       this.adminSvc.addProduct(product)
       .subscribe({
         next:(res:any)=>{
-        if (this.imagenesProducto.length > 8) {
-          this.openSnackBar('Se pueden agregar solo hasta 8 imagenes por producto!');
-        } else {
-          this.adminSvc
-            .uploadProductImg(this.imagenesProducto, res._id)
-            .then((img) => {
-              this.openSnackBar('Producto creado correctamente!');
-              this.formularioProducto.reset();
-            })
-            .catch((error) => console.error(error));
-        }
+         if (this.imagenesProducto.length > 8) {
+           this.openSnackBar('Se pueden agregar solo hasta 8 imagenes por producto!');
+         } else {
+           this.adminSvc
+             .uploadProductImg(this.imagenesProducto, res._id)
+             .then((img) => {
+               this.openSnackBar('Producto creado correctamente!');
+               this.formularioProducto.reset();
+             })
+             .catch((error) => console.error(error));
+         }
         },
         error:err=>{
            console.log("err",err);
-           this.dialog.open(ModalComponent, {
+           this.dialog.open(ModalErrorComponent, {
              disableClose: false,
-             data: err,
+             data: err.error.msg,
            });
         }
       });

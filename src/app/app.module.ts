@@ -10,7 +10,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LayoutComponent } from './layout/layout.component';
 import { InterceptorInterceptor } from './services/interceptor/interceptor.interceptor';
-import { ModalComponent } from './modalError/modal/modal.component';
+import { ModalErrorComponent } from './modalError/modal/modal.component';
 import { SharedModule } from './shared/shared.module';
 import { EnviosComponent } from './envios/components/envios/envios.component';
 
@@ -20,7 +20,7 @@ import { EnviosComponent } from './envios/components/envios/envios.component';
     FooterComponent,
     LayoutComponent,
     AppComponent,
-    ModalComponent,
+    ModalErrorComponent,
     EnviosComponent,
   ],
   imports: [

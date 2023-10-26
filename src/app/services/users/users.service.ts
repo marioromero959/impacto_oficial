@@ -13,4 +13,12 @@ export class UsersService {
   getAllUsers(){
     return this.http.get<Usuarios>(`${environment.API}/api/users`);
   }
+  resetPassword(id,user){
+    console.log("entro a sv",user,id);
+    return this.http.put(`${environment.API}/api/users/${id}`,user)
+  }
+
+  sendMailToResetPassword(email){
+    return this.http.put(`${environment.API}/api/users`,{email:email})
+  }
 }

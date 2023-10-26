@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { LayoutComponent } from './layout/layout.component';
+import { AdminGuard } from './shared/admin-guard.guard';
 
 const routes: Routes = [
     {
@@ -34,6 +34,11 @@ const routes: Routes = [
       data: { animation: 'animationContact' }
     },
     {
+      path: 'reset-password',
+      loadChildren: () => import('./reset-password/reset-password.module').then(m => m.ResetPasswordModule),
+      data: { animation: 'animationContact' }
+    },
+    {
       path: 'order',
       loadChildren: () => import('./order/order.module').then(m => m.OrderModule),
       data: { animation: 'animationOrder' }
@@ -50,6 +55,7 @@ const routes: Routes = [
     },
   {
     path: 'admin',
+    canActivate:[ AdminGuard ],
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },
 ];

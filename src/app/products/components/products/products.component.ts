@@ -47,6 +47,8 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.showSelector = !this.router.url.split('/').includes('categoria');
+    
+
     const { category } = this.route.snapshot.params;
     if(category){
       this.filterControl.setValue(category)
@@ -70,16 +72,17 @@ export class ProductsComponent implements OnInit {
 
 
   subChanges() {
-
     this.filterControl.valueChanges
-      .subscribe(cat=>{
-        this.cargarCategorias(cat)
-      })
-
+    .subscribe(cat=>{
+      if(cat){
+        this.idCategoria = this.categorias.find(c=>c.nombre == cat)._id
+        this.cargarProductos(this.idCategoria)
+      }
+    })
 
     this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(event => {
+      filter(event => event instanceof NavigationEnd))
+      .subscribe(event => {
       this.filterControl.setValue(this.route.snapshot.paramMap.get('category'))
       this.cargarCategorias(this.filterControl.value)
     });
@@ -111,14 +114,11 @@ export class ProductsComponent implements OnInit {
           this.categorias = [{ nombre: 'All' }, ...res.categorias];
           if(categoria){
             this.idCategoria = this.categorias.find(c=>c.nombre == categoria)._id
-            // this.currentPage = 0
           }
         })
         ).subscribe(res=>{
           this.cargarProductos(this.idCategoria)
       })
-
-
   }
 
   addCart(product: Productos) {

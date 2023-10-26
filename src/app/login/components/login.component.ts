@@ -3,7 +3,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalComponent } from 'src/app/modalError/modal/modal.component';
+import { ModalErrorComponent } from 'src/app/modalError/modal/modal.component';
 
 
 @Component({
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
         },
         err=>{
           console.log(err);
-            const dialogRef = this.dialog.open(ModalComponent,{
+            const dialogRef = this.dialog.open(ModalErrorComponent,{
               disableClose:false,
               data:err.error.msg
             }); 
@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  goToRegister(){
-    this.router.navigate(['/register'])
+  goTo(param){
+    this.router.navigate([`/${param}`])
   }
 }

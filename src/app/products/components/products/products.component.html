@@ -1,31 +1,29 @@
-<!-- <h1>NUESTROS PRODUCTOS</h1> -->
-<div class="toggle" *ngIf="this.showSelector; else title">
-    <mat-button-toggle-group [formControl]="filterControl">
-        <mat-button-toggle *ngFor="let cat of this.categorias" [value]="cat.nombre">{{cat.nombre}}</mat-button-toggle>
-      </mat-button-toggle-group>
-</div>
-<ng-template class="title" #title>
-    <h1>{{this.route.snapshot.params['category']}}</h1>
-</ng-template>
+    <div class="toggle" *ngIf="this.showSelector; else title">
+        <mat-button-toggle-group [formControl]="filterControl">
+            <mat-button-toggle *ngFor="let cat of this.categorias"
+                [value]="cat.nombre">{{cat.nombre}}</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+    <ng-template class="title" #title>
+        <h1>{{this.route.snapshot.params['category']}}</h1>
+    </ng-template>
 
-<div class="container" *ngIf="productos.length !== 0">
-    <mat-card class="card" *ngFor="let product of productos">
-        <img *ngIf="product.img" mat-card-image [src]="product.img[0]" alt="producto" loading="lazy" (click)="showDetails(product)">
-        <mat-card-header (click)="showDetails(product)">
-            <mat-card-title>{{product.nombre}}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content (click)="showDetails(product)">
-            <p class="precio">{{product.precio | currency}}</p>
-          </mat-card-content>
-        <mat-card-actions *ngIf="product.img">
-            <button class="btn" mat-raised-button color=info (click)="addCart(product)">Agregar al carrito</button>
-        </mat-card-actions>
-    </mat-card>
-</div>
-<div class="paginator">
-    <mat-paginator 
-        [length]="totalPages"
-        [pageSize]="1"
-        aria-label="Select page">
-    </mat-paginator>
-</div>
+    <div class="container" *ngIf="productos.length !== 0">
+        <mat-card class="card" *ngFor="let product of productos">
+            <img *ngIf="product.img" mat-card-image [src]="product.img[0]" alt="producto" loading="lazy"
+                (click)="showDetails(product)">
+            <mat-card-header (click)="showDetails(product)">
+                <mat-card-title>{{product.nombre}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content (click)="showDetails(product)">
+                <p class="precio">{{product.precio | currency}}</p>
+            </mat-card-content>
+            <mat-card-actions *ngIf="product.img">
+                <button class="btn" mat-raised-button color=info (click)="addCart(product)">Agregar al carrito</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div class="paginator">
+        <mat-paginator [length]="totalPages" [pageSize]="1" aria-label="Select page">
+        </mat-paginator>
+    </div>

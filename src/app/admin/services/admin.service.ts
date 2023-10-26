@@ -39,12 +39,11 @@ export class AdminService {
   //--
   //Productos
   addProduct(product){
+    
     const headers = new HttpHeaders({
       'x-token':localStorage.getItem('token')
     })
-    console.log("prod",product);
-    console.log("head",product);
-    
+    console.log(headers);
     return this.http.post(`${environment.API}/api/productos`,product,{headers})
   }
   

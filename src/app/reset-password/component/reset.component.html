@@ -1,0 +1,34 @@
+<div class="contact">
+    <div class="container">
+        <h1>Por favor ingresa los siguientes datos:</h1>
+        <form [formGroup]="resetForm">
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="correo" placeholder="usuario@email.com">
+                <mat-error *ngIf="emailField?.invalid">{{errorEmail()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" *ngIf="fromEmail">
+                <mat-label>Nueva Contraseña</mat-label>
+                <input matInput formControlName="contraseña" [type]="showPassword1 ? 'text' : 'password'">
+                <mat-icon matSuffix (click)="showPass(1)">{{icon1}}</mat-icon>
+                <mat-error *ngIf="passField?.hasError('required')">Debe ingresar la nueva contraseña</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" *ngIf="fromEmail">
+                <mat-label>Repetir Nueva Contraseña</mat-label>
+                <input matInput formControlName="re_contraseña" [type]="showPassword2 ? 'text' : 'password'">
+                <mat-icon matSuffix (click)="showPass(2)">{{icon2}}</mat-icon>
+                <mat-error *ngIf="passField?.hasError('required')">Debe repetir la nueva contraseña</mat-error>
+            </mat-form-field>
+            <p style="color: red;" *ngIf="!samePass">Las contraseñas no coinciden</p>
+            <p *ngIf="!fromEmail">
+                Te enviaremos un correo a la direccion del email para verificarlo y que puedas recuperar tu contraseña
+            </p>
+        </form>
+        <div class="buttons">
+            <button mat-raised-button color="accent"  type="button" (click)="resetPass()">Cambiar contraseña</button>
+            <button mat-raised-button color="primary" type="button" (click)="goToHome()">Volver a login</button>
+        </div>
+        </div>
+    
+    </div>
+    <!-- todo, terminar formulario y conectar -->
