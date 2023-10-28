@@ -22,8 +22,6 @@ export class LoginService {
     return this.http.post(`${environment.API}/api/auth/login`,data)
       .pipe(
       tap((res:any)=>{
-        console.log("res",res)
-        console.log("res",res)
         localStorage.setItem('currentUserName',res.usuario.nombre)
         localStorage.setItem('currentUserEmail',res.usuario.correo)
         localStorage.setItem('token',res.token)

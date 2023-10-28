@@ -70,7 +70,6 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-
   subChanges() {
     this.filterControl.valueChanges
     .subscribe(cat=>{

@@ -27,7 +27,6 @@ export class DetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-  console.log("tam",window.screen.width);
     this.perView = (window.screen.width < 480) ? 3 :5;
     const id = this.route.snapshot.params['id'];
     this.getProduct(id)

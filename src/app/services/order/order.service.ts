@@ -80,8 +80,6 @@ export class OrderService {
       let index = this.productos.controls.findIndex(p=>p.get('_id').value == product._id)
       this.productos.removeAt(index)
     }
-    console.log("prod",this.productos.value);
-    
      this.cart.next(this.productos.value)
   }
   
@@ -98,7 +96,6 @@ export class OrderService {
 
   cargarOrden(ordenId:string){
     //cargo la orden de compra para compararla despues con los productos vendidos
-    console.log("desde sv.",ordenId);
     const orderId = {ordenId:ordenId}
     return this.http.post<any>(`${environment.API}/api/compras/cargarCompra`,orderId)
   }

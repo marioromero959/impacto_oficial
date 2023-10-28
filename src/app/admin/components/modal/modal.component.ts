@@ -112,7 +112,6 @@ export class ModalComponent{
     }
   }
 
-  //TODO: MENSAJE DE ERRORES
   editarProducto() {
     if (this.formularioProducto.invalid) {
       this.formularioProducto.markAllAsTouched();

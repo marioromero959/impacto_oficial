@@ -13,4 +13,3 @@ export class MailService {
     return this._http.post(`${environment.API}/api/email`,{emailBody:correo});
   }
 }
-//TODO
