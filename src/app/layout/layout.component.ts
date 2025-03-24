@@ -26,10 +26,15 @@ export class LayoutComponent implements OnInit {
   categorias
   existsToken:boolean = false;
   subMenuOpen:boolean = false;
+  showOrder:boolean = false;
+  isOpen = false;
+  isOpenCart:boolean = false;
+  
 
-  @ViewChild('nav') nav: ElementRef;
-  @ViewChild('menuButton') menuButton: ElementRef;
+  @ViewChild('nav') nav: ElementRef;//mobile
+  @ViewChild('cart') cart: ElementRef;//mobile
   @ViewChild('productSubMenu') productSubMenu: ElementRef;
+  @ViewChild('cartSubMenu') cartSubMenu: ElementRef;
 
   constructor(
     private adminSvc: AdminService,
@@ -45,14 +50,6 @@ export class LayoutComponent implements OnInit {
       this.existsToken = localStorage.getItem('token') ? true : false; 
     }
 
-  @HostListener('window:resize', ['$event'])
-  getScreenSize(event?) {
-    if(window.innerWidth > 767){
-      this.render.removeClass(this.nav.nativeElement, "animenu__nav--active");
-      this.render.removeClass(this.menuButton.nativeElement, "animenu__btn--active");
-    }
-  }
-
   ngOnInit() {
     this.adminSvc.getCategories().subscribe((res) => {
       this.categorias = res['categorias'].map((c) => c.nombre);
@@ -66,9 +63,9 @@ export class LayoutComponent implements OnInit {
       ).subscribe(event => {
       this.existsToken = localStorage.getItem('token') ? true : false; 
       //cada que cambia la ruta, cerramos el menu
-      this.render.removeClass(this.productSubMenu.nativeElement, "show");
-      this.render.removeClass(this.nav.nativeElement, "animenu__nav--active");
-      this.render.removeClass(this.menuButton.nativeElement, "animenu__btn--active");
+      // this.render.removeClass(this.productSubMenu.nativeElement, "show");
+      // this.render.removeClass(this.nav.nativeElement, "animenu__nav--active");
+      // this.render.removeClass(this.menuButton.nativeElement, "animenu__btn--active");
     });
   }
 
@@ -76,14 +73,14 @@ export class LayoutComponent implements OnInit {
     this.router.navigate(['/order'])
   }
 
-  public badge() {
+  get badge() {
     let badge = this.productos
       .map(product => product.cantidad)
       .reduce((a, b) => a + b, 0);
     return badge
   }
 
-  public total() {
+  get total() {
     let total = this.productos
       .map(product => product.precio * product.cantidad)
       .reduce((a, b) => a + b, 0);
@@ -111,15 +108,54 @@ export class LayoutComponent implements OnInit {
       this.render.removeClass(event.target, "animenu__btn--active");
     }
   }
+  
+  addCart(product:Productos){
+    this.orderSvc.addCart(product)
+  }
+  removeItem(product){
+    this.orderSvc.deleteCart(product)
+  }
+  deleteItem(product){
+    this.orderSvc.deleteProductCart(product)
+  }
+  deleteAll(){
+    this.orderSvc.deleteAllCart()
+  }
 
-    triggerProudctMenu(){
-      this.subMenuOpen = !this.subMenuOpen;
-      if(this.subMenuOpen){
-        this.render.addClass(this.productSubMenu.nativeElement, "show");
-      }else{
-        this.render.removeClass(this.productSubMenu.nativeElement, "show");
-      }
-      
+  triggerDrowpdown(element:string){
+    this.subMenuOpen = !this.subMenuOpen;
+    switch (element) {
+      case 'prodcutItem':
+        if(this.subMenuOpen){
+          this.render.addClass(this.productSubMenu.nativeElement, "show");
+        }else{
+          this.render.removeClass(this.productSubMenu.nativeElement, "show");
+        }        
+        break;
+      case 'cartItem':
+        if(this.subMenuOpen){
+          this.render.addClass(this.cartSubMenu.nativeElement, "show");
+        }else{
+          this.render.removeClass(this.cartSubMenu.nativeElement, "show");
+        }
+        break;
+      case 'nav':
+        if(this.subMenuOpen){
+          this.render.addClass(this.nav.nativeElement, "show");
+        }else{
+          this.render.removeClass(this.nav.nativeElement, "show");
+        }
+        break;
+      case 'cart':
+        if(this.subMenuOpen){
+          this.render.addClass(this.cart.nativeElement, "show");
+        }else{
+          this.render.removeClass(this.cart.nativeElement, "show");
+        }
+        break;
+      default:
+        break;
     }
+  }
 
 }

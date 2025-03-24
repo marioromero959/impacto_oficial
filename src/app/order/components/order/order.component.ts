@@ -102,8 +102,11 @@ export class OrderComponent implements OnInit {
   addCart(product:Productos){
     this.orderSvc.addCart(product)
   }
-  deleteItem(product){
+  removeItem(product){
     this.orderSvc.deleteCart(product)
+  }
+  deteleItem(product){
+    this.orderSvc.deleteProductCart(product)
   }
   deleteAll(){
     this.orderSvc.deleteAllCart()

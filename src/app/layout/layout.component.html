@@ -1,40 +1,99 @@
-<nav class="animenu" role="navigation" aria-label="Menu">
-  <button class="animenu__btn" type="button" #menuButton (click)="changeScreen($event)">
-    <span class="animenu__btn__bar"></span>
-    <span class="animenu__btn__bar"></span>
-    <span class="animenu__btn__bar"></span>
-  </button>
+<nav class="menu" role="navigation" aria-label="Menu">
+  <div class="menu-mobile">
+    <img src="../../assets/svg-menu.svg" alt="Logo" (click)="isOpen = !isOpen">
+    <div class="menu" [class.open]="isOpen">
+      <mat-icon (click)="isOpen = false">close</mat-icon>
+      <li><a routerLink="/home" (click)="isOpen = false">Home</a></li>
+      <li class="menu__nav__dropdown">
+        <a (click)="triggerDrowpdown('nav')">Productos</a>
+        <ul class="dropdown" aria-label="submenu" role="menu" #nav>
+          <li *ngFor="let cat of this.categorias"><a routerLink="products/categoria/{{cat}}" (click)="isOpen = !isOpen" role="menuitem">{{cat}}</a>
+          </li>
+        </ul>
+      </li>
+      <li><a routerLink="/contact" (click)="isOpen = false">Contacto</a></li>
+    </div>
 
-  <ul class="animenu__nav" #nav>
+  <div class="menu" [class.open]="isOpenCart">
+    <mat-icon (click)="isOpenCart = false">close</mat-icon>
+    <div style="align-items: flex-start;">
+      <mat-card class="card" *ngFor="let product of productos;let i = index">
+        <img mat-card-image [src]="product.img[0]" alt="product.descripcion" loading="lazy">
+        <div class="add">
+          <p>{{product.nombre}}</p>
+          <div>
+            <mat-icon (click)="addCart(product)">add</mat-icon>       
+            <p>{{product.cantidad}}</p>
+            <mat-icon (click)="removeItem(product)">remove</mat-icon>
+          </div>
+        </div>
+        <div class="add">
+          <p (click)="deleteItem(product)">Eliminar</p>
+          <p>${{product.precio*product.cantidad | number:'1.2-2':'es-ES'}}</p>
+        </div>
+      </mat-card>
+      
+      <li>
+        <a>TOTAL: ${{ total | number:'1.2-2':'es-ES'}}</a>
+      </li>
+      <li routerLink="/order">
+        <button mat-button type="button" (click)="isOpenCart = false">Ir al carrito</button>
+      </li>
+    </div>
+  </div>
+
+    <!-- <img src="../../../assets/impacto_logo_transparente.png" alt="Logo" (click)="isOpen = false" routerLink="/login"> -->
+    <div class="sub-mobile">
+      <!-- <mat-icon (click)="isOpen = false" routerLink="/login">search</mat-icon> -->
+      <mat-icon (click)="isOpen = false" routerLink="/login">person</mat-icon>
+      <mat-icon (click)="isOpen = false" (click)="isOpenCart = !isOpenCart">shopping_cart</mat-icon>
+    </div>
+  </div>
+
+  <ul class="menu__nav" #nav>
     <li class="logo">
       <a routerLink="/home">
         <img src="../../../assets/impacto_logo_transparente.png" alt="impacto_tienda" loading="lazy">
       </a>
     </li>
     <li><a routerLink="/home">Home</a></li>
-    <li>
-      <a class="animenu__nav__hasDropdown" aria-haspopup="true" (click)="triggerProudctMenu()" style="cursor: pointer;">Productos</a>
-      <ul class="animenu__nav__dropdown" aria-label="submenu" role="menu" #productSubMenu>
-        <li *ngFor="let cat of this.categorias"><a routerLink="products/categoria/{{cat}}" role="menuitem">{{cat}}</a></li>
+    <li class="menu__nav__dropdown">
+      <a (click)="triggerDrowpdown('prodcutItem')">Productos</a>
+      <ul class="dropdown" aria-label="submenu" role="menu" #productSubMenu>
+        <li *ngFor="let cat of this.categorias"><a routerLink="products/categoria/{{cat}}" role="menuitem">{{cat}}</a>
+        </li>
       </ul>
     </li>
     <li><a routerLink="/contact">Contacto</a></li>
-    <li>
-      <a mat-button color="primary" [matMenuTriggerFor]="menu">Carrito<mat-icon
-        [matBadge]="badge()">shopping_cart</mat-icon></a>
-      </li>
     <div class="spacer"></div>
-    <li *ngIf="!existsToken"><a routerLink="/login">Ingresar</a></li>
-    <li *ngIf="!existsToken"><a routerLink="/register">Registrarse</a></li>
-    <li (click)="outSession()" *ngIf="existsToken"><a>Cerrar Sesion</a></li>
-    <mat-menu #menu>
-      <div class="order">
-        <p><strong>TOTAL: {{total() | currency}}</strong></p>
-        <p mat-menu-item routerLink="/order">
-          <mat-icon>shopping_cart</mat-icon>
-          Ver Carrito
-        </p>
+    <li class="item-order">
+      <a (click)="triggerDrowpdown('cartItem')">
+        Carrito
+        <mat-icon>shopping_cart</mat-icon>
+        <div class="badge">{{badge}}</div>
+      </a>
+      <div #cartSubMenu class="dropdown" style="align-items: flex-start;">
+        <mat-card class="card" *ngFor="let product of productos;let i = index">
+          <img mat-card-image [src]="product.img[0]" alt="product.descripcion" loading="lazy">
+          <div class="add">
+            <p>{{product.nombre}}</p>
+            <div>
+              <mat-icon (click)="addCart(product)">add</mat-icon>
+              <p>{{product.cantidad}}</p>
+              <mat-icon (click)="removeItem(product)">remove</mat-icon>
+            </div>
+          </div>
+          <div class="add">
+            <p (click)="deleteItem(product)">Eliminar</p>
+            <p>${{product.precio*product.cantidad | number:'1.2-2':'es-ES'}}</p>
+          </div>
+        </mat-card>
+        <li>
+          <a>TOTAL: ${{ total | number:'1.2-2':'es-ES'}}</a>
+        </li>
       </div>
-    </mat-menu>
+    </li>
+    <li *ngIf="!existsToken"><a routerLink="/login">Iniciar Sesión</a></li>
+    <li (click)="outSession()" *ngIf="existsToken"><a>Cerrar Sesion</a></li>
   </ul>
 </nav>

@@ -1,347 +1,196 @@
-// Variables
-$baseMenuBackground: #111; // Base color theme
-$secondaryMenuBackground: #0186ba; // Secondary color (highlights, triangles...)
-$gutter: 10px; // Base gutter
+.menu {
+  background: transparent;
+  backdrop-filter: blur(40px);
 
-*,
-*:after,
-*:before {
-  box-sizing: border-box;
-}
-
-// </button>
-.animenu__btn {
-  display: none;
-  cursor: pointer;
-  background-color: $baseMenuBackground;
-  border: 0;
-  padding: 10px;
-  height: 40px;
-  width: 40px;
-
-  &:hover {
-    background-color: $secondaryMenuBackground;
-  }
-}
-
-.animenu__btn__bar {
-  display: block;
-  width: 20px;
-  height: 2px;
-  background-color: #fff;
-  transition: .15s cubic-bezier(0.75, -0.55, 0.25, 1.55);
-
-  &+.animenu__btn__bar {
-    margin-top: 4px;
-  }
-}
-
-.animenu__btn--active {
-  .animenu__btn__bar {
-    margin: 0;
-    position: absolute;
-
-    &:nth-child(1) {
-      transform: rotate(45deg);
-    }
-
-    &:nth-child(2) {
-      opacity: 0;
-    }
-
-    &:nth-child(3) {
-      transform: rotate(-45deg);
-    }
-  }
-}
-
-.animenu {
-  display: block;
-  background-color: #111;
-
-  ul {
+  .menu__nav {
+    display: flex;
+    align-items: center;
+    max-height: 50px;
     padding: 0;
+    margin: 0;
     list-style: none;
-    font: 0 -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      "Roboto",
-      "Helvetica Neue", Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
 
-  li,
-  a {
+  li {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  li a {
     display: inline-block;
-    font-size: 15px;
-  }
-
-  a {
-    color: lighten($baseMenuBackground, 60%);
+    color: #000;
     text-decoration: none;
-  }
-}
-
-.animenu__nav {
-  background-color: $baseMenuBackground;
-
-  >li {
-    position: relative;
-    border-right: 1px solid lighten($baseMenuBackground, 20%);
-
-    >a {
-      padding: $gutter 3 * $gutter;
-      text-transform: uppercase;
-    }
+    padding: 10px 3 * 10px;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    font-family: var(--primary-font);
+    font-weight: 500;
+    font-size: 14px;
+    transition: .1s;
 
     &:hover {
-      >a {
-        color: #fff;
-      }
+      color: #0186ba;
     }
-
-    &:focus-within {
-      // >ul {
-      //   opacity: 1;
-      //   visibility: visible;
-      //   margin: 0;
-      // }
-
-      >a {
-        color: #fff;
-      }
-    }
-  }
-
-  &__hasDropdown:before {
-    content: "";
-    position: absolute;
-    border: 4px solid transparent;
-    border-bottom: 0;
-    border-top-color: currentColor;
-    top: 50%;
-    margin-top: -2px;
-    right: 10px;
   }
 }
 
+.menu__nav__dropdown {
+  position: relative;
+}
 
-
-.animenu__nav__dropdown {
-  min-width: 100%;
+.dropdown {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1;
+  width: max-content;
+  top: 45px;
+  left: -3px;
+  background-color: #fff;
+  transition: .1s;
+  padding: 0;
   opacity: 0;
-  visibility: hidden;
-  margin: 2 * $gutter 0 0 0;
-  background-color: lighten($baseMenuBackground, 15%);
-  transition: margin .15s, opacity .15s;
-
-  >li {
-    width: 100%;
-    border-bottom: 1px solid lighten($baseMenuBackground, 25%);
-
-    &:first-child>a:after {
-      content: '';
-      position: absolute;
-      height: 0;
-      width: 0;
-      left: 1em;
-      top: -6px;
-      border: 6px solid transparent;
-      border-top: 0;
-      border-bottom-color: inherit;
-    }
-
-    &:last-child {
-      border: 0;
-    }
-  }
-
-  a {
-    padding: $gutter;
-    width: 100%;
-    border-color: lighten($baseMenuBackground, 15%);
-
-    &:hover {
-      background-color: $secondaryMenuBackground;
-      border-color: $secondaryMenuBackground;
-      color: #fff;
-    }
-
-    &:focus-within {
-      background-color: $secondaryMenuBackground;
-      border-color: $secondaryMenuBackground;
-      color: #fff;
-    }
-  }
 }
 
+.show {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+}
 
-.spacer{
+.badge {
+  position: relative;
+  top: 3px;
+  right: 3px;
+}
+
+.spacer {
   flex: 1 1 0;
 }
 
-@media screen and (max-width: 767px) {
-  .animenu__btn {
-    display: inline-block;
-  }
-
-  .animenu__nav,
-  .animenu__nav__dropdown {
-    display: none;
-  }
-
-  .animenu__nav {
-    margin: $gutter 0;
-
-    >li {
-      width: 100%;
-      border-right: 0;
-      border-bottom: 1px solid lighten($baseMenuBackground, 25%);
-
-      &:last-child {
-        border: 0;
-      }
-
-      &:first-child>a:after {
-        content: '';
-        position: absolute;
-        height: 0;
-        width: 0;
-        left: 1em;
-        top: -6px;
-        border: 6px solid transparent;
-        border-top: 0;
-        border-bottom-color: inherit;
-      }
-
-      >a {
-        width: 100%;
-        padding: $gutter;
-        border-color: $baseMenuBackground;
-        position: relative; //dropdown caret
-      }
+.item-order {
+  position: relative;
+  .dropdown{
+    top: 47px;
+    left: -100%;
+    width: 400px;
+    .card{
+      border-radius: 0;
+      width: 92%;
     }
-
-    a:hover {
-      background-color: $secondaryMenuBackground;
-      border-color: $secondaryMenuBackground;
-      color: #fff;
-    }
-  }
-
-  .animenu__nav__dropdown {
-    position: static;
-    background-color: lighten($baseMenuBackground, 15%);
-    margin: 0;
-    transition: none;
-    visibility: visible;
-    opacity: 1;
-
-    >li:first-child>a:after {
-      content: none;
-    }
-
-    a {
-      padding-left: 2 * $gutter;
-      width: 100%;
-    }
-  }
-
-
-  .animenu__nav {
-    background-color: $baseMenuBackground;
-
-    >li {
-      position: relative;
-      border-right: 1px solid lighten($baseMenuBackground, 20%);
-
-      >a {
-        padding: $gutter 3 * $gutter;
-        text-transform: uppercase;
-      }
-
-      ul {
-        opacity: 0;
-        visibility: hidden;
-        margin: 0;
-        transition: .2s;
-        a {
-          display: none;
-        }
-      }
-
-      .show {
-          opacity: 1;
-          visibility: visible;
-          margin: 0;
-          a {
-            display: block;
-          }
-      }
-
-    }
-  }
-  .logo a{
-    display: none;
   }
 }
 
-@media screen and (min-width:767px) {
-  .animenu {
-    display: block;
-    ul {
+.logo img {
+  padding: 0;
+  margin: 0;
+  width: 50px;
+}
+.menu-mobile{
+  display: none;
+}
+
+.card{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-width: 353px;
+  img{
+    width: 50px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+  }
+  p{
+    margin: 0;
+  }
+  .add{
+    display: flex;
+    flex-direction: column;
+    div{
       display: flex;
       align-items: center;
     }
-    .animenu__nav__dropdown{
-      display: block;
+  }
+  .add:nth-child(2){
+    width: 50%;
+    text-align: start;
+  }
+  .add:nth-child(3){
+    width: 33%;
+  }
+}
+
+@media(max-width:480px){
+
+  .menu-mobile{
+    display: flex;
+    max-width: 100%;
+    height: 50px;
+    justify-content: space-between;
+    align-items: center;
+    li{
+      width: 100%;
+      border-bottom: 1px solid grey;
     }
-  }
-}
-
-.animenu__nav--active {
-  display: block !important;
-
-  & .animenu__nav__dropdown {
-    display: block;
-  }
-}
-
-
-.order {
-  padding: 15px;
-  background-color: #111;
-
-  p {
-    font-family: var(--primary-font);
-    color: #fff;
-    margin: 0;
-
-    strong {
-      margin: 0 5px;
+    .menu{
+      position: absolute;
+      top: 0;
+      right: 100%;
+      width: 100%;
+      height: 100vh;
+      background-color: #fff;
+      transition: right 0.3s ease-in-out;
+      text-align: end;
+      mat-icon{
+        margin: 7px;
+      }
+    }
+    img{
+      width: 30px;
+      height: 30px;
+      padding: 5px;
+    }
+    .dropdown {
+      width: 100%;
+      top: 27px;
+      left: -100%;
+      z-index: 1;
+      background-color: rgb(239, 239, 239);
+      opacity: 1;
+      transition: left 0.3s ease-in-out;
     }
 
-    mat-icon {
-      color: #fff;
+    .menu.open {
+      right: 0;
+      .dropdown.show {
+        left: 0;
+      }
     }
+
+    .sub-mobile{
+      display: flex;
+      margin-right: 8px;
+      mat-icon{
+        margin: 0 7px;
+      }
+    }
+
+
   }
-}
-
-
-.logo {
-  img {
-    padding: 0;
-    margin: 0;
-    width: 50px;
+  .card{
+    width:auto;
+    min-width: 0;
   }
-}
 
-.show{
-  opacity: 1;
-  visibility: visible;
-  margin: 0;
+  .menu__nav{
+    display: none !important;
+  }
+
+  .logo{
+    display: none;
+  }
 }

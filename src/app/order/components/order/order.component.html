@@ -10,7 +10,7 @@
                   <p>Cantidad:{{product.cantidad}}</p>
                     <p>{{product.precio*product.cantidad | currency}}</p>
                     <mat-card-actions>
-                        <button class="buy-btn show-more" mat-raised-button (click)="deleteItem(product)">Eliminar</button>
+                        <button class="buy-btn show-more" mat-raised-button (click)="removeItem(product)">Eliminar</button>
                         <button class="buy-btn" mat-raised-button color=primary (click)="addCart(product)">Agregar(+1)</button>
                     </mat-card-actions>
                 </mat-card-content>

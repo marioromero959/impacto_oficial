@@ -82,6 +82,16 @@ export class OrderService {
     }
      this.cart.next(this.productos.value)
   }
+
+  deleteProductCart(product){
+    this.productos.controls.forEach(p=>{
+      if(p.get('_id').value == product._id){
+        let index = this.productos.controls.findIndex(p=>p.get('_id').value == product._id)
+        this.productos.removeAt(index)
+      }
+    })
+    this.cart.next(this.productos.value)
+  }
   
   deleteAllCart(){
     while (this.productos.length !== 0) {

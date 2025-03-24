@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +13,11 @@ import { InterceptorInterceptor } from './services/interceptor/interceptor.inter
 import { ModalErrorComponent } from './modalError/modal/modal.component';
 import { SharedModule } from './shared/shared.module';
 import { EnviosComponent } from './envios/components/envios/envios.component';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+
+
+registerLocaleData(localeEs, 'es-ES');
 
 @NgModule({
   declarations: [
@@ -37,7 +42,10 @@ import { EnviosComponent } from './envios/components/envios/envios.component';
     provide: HTTP_INTERCEPTORS,
     useClass:InterceptorInterceptor,
     multi: true,
-  }],
+  },
+  { provide: LOCALE_ID, useValue: 'es-ES' }
+
+],
 
   bootstrap: [AppComponent]
 })
